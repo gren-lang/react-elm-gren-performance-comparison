@@ -1,29 +1,19 @@
 port module Todo exposing (main)
-{-| TodoMVC implemented in Elm, using plain HTML and CSS for rendering.
 
-This application is broken up into three key parts:
-
-  1. Model  - a full definition of the application's state
-  2. Update - a way to step the application state forward
-  3. View   - a way to visualize our application state with HTML
-
-This clean division of concerns is a core part of Elm. You can read more about
-this in <http://guide.elm-lang.org/architecture/index.html>
--}
-
+import Browser
 import Html exposing (..)
-import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
 import String
+import Platform
 
 
 
-main : Program Never
+main : Platform.Program () Model Msg
 main =
-  App.program
-    { init = init
+  Browser.element
+    { init = \_ -> init
     , view = view
     , update = update
     , subscriptions = \_ -> Sub.none
@@ -37,7 +27,6 @@ port focus : String -> Cmd msg
 -- MODEL
 
 
--- The full application state of our todo app.
 type alias Model =
     { entries : List Entry
     , field : String
@@ -74,17 +63,15 @@ newEntry desc id =
 
 init : ( Model, Cmd Msg )
 init =
-  emptyModel ! []
+  ( emptyModel
+  , Cmd.none
+  )
 
 
 
 -- UPDATE
 
 
-{-| Users of our app can trigger messages by clicking and typing. These
-messages are fed into the `update` function as they occur, letting us react
-to them.
--}
 type Msg
     = NoOp
     | UpdateField String
@@ -103,10 +90,12 @@ update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
   case msg of
     NoOp ->
-      model ! []
+      ( model
+      , Cmd.none
+      )
 
     Add ->
-      { model
+      ({ model
         | uid = model.uid + 1
         , field = ""
         , entries =
@@ -115,55 +104,64 @@ update msg model =
             else
               model.entries ++ [newEntry model.field model.uid]
       }
-        ! []
+      , Cmd.none
+      )
 
     UpdateField str ->
-      { model | field = str }
-        ! []
+      ( { model | field = str }
+      , Cmd.none
+      )
 
     EditingEntry id isEditing ->
       let
         updateEntry t =
           if t.id == id then { t | editing = isEditing } else t
       in
-        { model | entries = List.map updateEntry model.entries }
-          ! [ focus ("#todo-" ++ toString id) ]
+      ( { model | entries = List.map updateEntry model.entries }
+      , focus ("#todo-" ++ String.fromInt id)
+      )
 
     UpdateEntry id task ->
       let
         updateEntry t =
           if t.id == id then { t | description = task } else t
       in
-        { model | entries = List.map updateEntry model.entries }
-          ! []
+      ( { model | entries = List.map updateEntry model.entries }
+      , Cmd.none
+      )
 
     Delete id ->
-      { model | entries = List.filter (\t -> t.id /= id) model.entries }
-        ! []
+      ( { model | entries = List.filter (\t -> t.id /= id) model.entries }
+      , Cmd.none
+      )
 
     DeleteComplete ->
-      { model | entries = List.filter (not << .completed) model.entries }
-        ! []
+      ( { model | entries = List.filter (not << .completed) model.entries }
+      , Cmd.none
+      )
 
     Check id isCompleted ->
       let
         updateEntry t =
           if t.id == id then { t | completed = isCompleted } else t
       in
-        { model | entries = List.map updateEntry model.entries }
-          ! []
+      ( { model | entries = List.map updateEntry model.entries }
+      , Cmd.none
+      )
 
     CheckAll isCompleted ->
       let
         updateEntry t =
           { t | completed = isCompleted }
       in
-        { model | entries = List.map updateEntry model.entries }
-          ! []
+      ( { model | entries = List.map updateEntry model.entries }
+      , Cmd.none
+      )
 
     ChangeVisibility visibility ->
-      { model | visibility = visibility }
-        ! []
+      ( { model | visibility = visibility }
+      , Cmd.none
+      )
 
 
 
@@ -174,7 +172,7 @@ view : Model -> Html Msg
 view model =
   div
     [ class "todomvc-wrapper"
-    , style [ ("visibility", "hidden") ]
+    , style "visibility" "hidden"
     ]
     [ section
         [ class "todoapp" ]
@@ -234,11 +232,11 @@ viewEntries visibility entries =
   in
     section
       [ class "main"
-      , style [ ("visibility", cssVisibility) ]
+      , style "visibility" cssVisibility
       ]
       [ input
           [ class "toggle-all"
-          , type' "checkbox"
+          , type_ "checkbox"
           , name "toggle"
           , checked allCompleted
           , onClick (CheckAll (not allCompleted))
@@ -264,7 +262,7 @@ viewEntry todo =
         [ class "view" ]
         [ input
             [ class "toggle"
-            , type' "checkbox"
+            , type_ "checkbox"
             , checked todo.completed
             , onClick (Check todo.id (not todo.completed))
             ]
@@ -282,7 +280,7 @@ viewEntry todo =
         [ class "edit"
         , value todo.description
         , name "title"
-        , id ("todo-" ++ toString todo.id)
+        , id ("todo-" ++ String.fromInt todo.id)
         , onInput (UpdateEntry todo.id)
         , onBlur (EditingEntry todo.id False)
         , onEnter (EditingEntry todo.id False)
@@ -322,7 +320,7 @@ viewControlsCount entriesLeft =
   in
     span
       [ class "todo-count" ]
-      [ strong [] [ text (toString entriesLeft) ]
+      [ strong [] [ text (String.fromInt entriesLeft) ]
       , text (item_ ++ " left")
       ]
 
@@ -355,7 +353,7 @@ viewControlsClear entriesCompleted =
     , hidden (entriesCompleted == 0)
     , onClick DeleteComplete
     ]
-    [ text ("Clear completed (" ++ toString entriesCompleted ++ ")")
+    [ text ("Clear completed (" ++ String.fromInt entriesCompleted ++ ")")
     ]
 
 

@@ -9,14 +9,21 @@
 </head>
 
 <body>
+    <div id="elm-app"></div>
 </body>
 
 <script type="text/javascript">
-var todomvc = Elm.fullscreen(Elm.Todo);
-todomvc.ports.focus.subscribe(function(selector) {
-    setTimeout(function() {
+var todomvc = Elm.Todo.init({
+    node: document.getElementById("elm-app")
+});
+
+todomvc.ports.focus.subscribe(function(selector)
+{
+    setTimeout(function()
+    {
         var nodes = document.querySelectorAll(selector);
-        if (nodes.length === 1 && document.activeElement !== nodes[0]) {
+        if (nodes.length === 1 && document.activeElement !== nodes[0])
+        {
             nodes[0].focus();
         }
     }, 50);
