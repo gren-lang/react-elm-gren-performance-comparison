@@ -1,14 +1,14 @@
 port module Picker exposing (main)
 
+import Browser
 import Html exposing (..)
-import Html.App as App
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 
 
 
 main =
-  App.programWithFlags
+  Browser.element
     { init = init
     , view = view
     , update = update
@@ -43,11 +43,11 @@ type alias Impl =
 
 init : List Impl -> ( Model, Cmd msg )
 init impls =
-  { running = False
-  , entries = List.indexedMap (Entry False) impls
-  }
-    ! []
-
+  ( { running = False
+    , entries = List.indexedMap (Entry False) impls
+    }
+  , Cmd.none
+  )
 
 
 -- UPDATE
@@ -63,16 +63,19 @@ update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
   case msg of
     Toggle id ->
-      { model | entries = toggle id model.entries }
-        ! []
+      ( { model | entries = toggle id model.entries }
+      , Cmd.none
+      )
 
     Start ->
-      { model | running = True }
-        ! [ startSelected model.entries ]
+      ( { model | running = True }
+      , startSelected model.entries
+      )
 
     End ->
-      { model | running = False }
-        ! []
+      ( { model | running = False }
+      , Cmd.none
+      )
 
 
 toggle : Int -> List Entry -> List Entry
@@ -117,10 +120,10 @@ view : Model -> Html Msg
 view { running, entries } =
   div []
     [ ul
-        (if running then [ style [("color", "#aaa")] ] else [])
+        (if running then [ style "color" "#aaa" ] else [])
         (List.map (viewEntry running) entries)
     , button
-        [ style [("width","100%")]
+        [ style "width" "100%"
         , disabled running
         , onClick Start
         ]
@@ -132,10 +135,10 @@ viewEntry : Bool -> Entry -> Html Msg
 viewEntry running { id, selected, impl } =
   li
     (if running then [ pointer ] else [ pointer, onClick (Toggle id) ])
-    [ input [ type' "checkbox", checked selected, disabled running ] []
+    [ input [ type_ "checkbox", checked selected, disabled running ] []
     , text (" " ++ impl.name ++ " " ++ impl.version)
     , span
-        [ style [("color","#aaa")]
+        [ style "color" "#aaa"
         ]
         [ text (if impl.optimized then " (optimized)" else "")
         ]
@@ -144,4 +147,4 @@ viewEntry running { id, selected, impl } =
 
 pointer : Attribute msg
 pointer =
-  style [ ("cursor", "pointer") ]
+  style "cursor" "pointer"

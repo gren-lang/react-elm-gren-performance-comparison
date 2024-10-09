@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "elm make Picker.elm --output picker.js --optimize"
+  },
+  "dependencies": {
+    "elm": "^0.19.1-6"
+  }
+}
