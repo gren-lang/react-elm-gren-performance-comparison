@@ -42,9 +42,15 @@ function inputTodo(number)
 	{
 		var node = facts.input;
 
+		var nativeInputValueSetter = Object.getOwnPropertyDescriptor(
+			  window.HTMLInputElement.prototype,
+		    'value'
+		).set;
+		
+		nativeInputValueSetter.call(node, 'Do task ' + number);
+		
 		var inputEvent = document.createEvent('Event');
 		inputEvent.initEvent('input', true, true);
-		node.value = 'Do task ' + number;
 		node.dispatchEvent(inputEvent);
 	};
 }
