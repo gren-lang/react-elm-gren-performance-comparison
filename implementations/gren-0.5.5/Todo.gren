@@ -4,6 +4,7 @@ import Browser
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Html.Keyed as Keyed
 import Json.Decode as Json
 import String
 import Platform
@@ -245,8 +246,8 @@ viewEntries visibility entries =
       , label
           [ for "toggle-all" ]
           [ text "Mark all as complete" ]
-      , ul [ class "todo-list" ] <|
-           Array.map viewEntry ( Array.keepIf isVisible entries)
+      , Keyed.ul [ class "todo-list" ] <|
+           Array.map viewEntry ( Array.keepIf isVisible entries )
       ]
 
 
@@ -254,39 +255,49 @@ viewEntries visibility entries =
 -- VIEW INDIVIDUAL ENTRIES
 
 
-viewEntry : Entry -> Html Msg
+viewEntry : Entry -> { key : String, node : Html Msg }
 viewEntry todo =
-  li
-    [ classList [ { class = "completed", enabled = todo.completed }, { class = "editing", enabled = todo.editing } ] ]
-    [ div
-        [ class "view" ]
-        [ input
-            [ class "toggle"
-            , type_ "checkbox"
-            , checked todo.completed
-            , onClick (Check { id = todo.id, checked = (not todo.completed) })
-            ]
-            []
-        , label
-            [ onDoubleClick (EditingEntry { id = todo.id, checked = True }) ]
-            [ text todo.description ]
-        , button
-            [ class "destroy"
-            , onClick (Delete todo.id)
-            ]
-            []
+  let
+    nodeId = "todo-" ++ String.fromInt todo.id
+  in
+  { key = nodeId
+  , node =
+    li
+      [ classList
+        [ { class = "completed", enabled = todo.completed }
+        , { class = "editing", enabled = todo.editing }
         ]
-    , input
-        [ class "edit"
-        , value todo.description
-        , name "title"
-        , id ("todo-" ++ String.fromInt todo.id)
-        , onInput (\value -> UpdateEntry { id = todo.id, value = value })
-        , onBlur (EditingEntry { id = todo.id, checked = False })
-        , onEnter (EditingEntry { id = todo.id, checked = False })
-        ]
-        []
-    ]
+      ]
+      [ div
+          [ class "view" ]
+          [ input
+              [ class "toggle"
+              , type_ "checkbox"
+              , checked todo.completed
+              , onClick (Check { id = todo.id, checked = (not todo.completed) })
+              ]
+              []
+          , label
+              [ onDoubleClick (EditingEntry { id = todo.id, checked = True }) ]
+              [ text todo.description ]
+          , button
+              [ class "destroy"
+              , onClick (Delete todo.id)
+              ]
+              []
+          ]
+      , input
+          [ class "edit"
+          , value todo.description
+          , name "title"
+          , id nodeId
+          , onInput (\value -> UpdateEntry { id = todo.id, value = value })
+          , onBlur (EditingEntry { id = todo.id, checked = False })
+          , onEnter (EditingEntry { id = todo.id, checked = False })
+          ]
+          []
+      ]
+  }
 
 
 

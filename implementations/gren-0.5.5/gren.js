@@ -85,7 +85,7 @@ var _Browser_element = F3(function (impl, flagDecoder, args) {
   return _Platform_initialize(
     flagDecoder,
     args,
-    impl.a0,
+    impl.a_,
     impl.bo,
     impl.bm,
     function (sendToApp, initialModel) {
@@ -119,11 +119,11 @@ var _Browser_document = F3(function (impl, flagDecoder, args) {
   return _Platform_initialize(
     flagDecoder,
     args,
-    impl.a0,
+    impl.a_,
     impl.bo,
     impl.bm,
     function (sendToApp, initialModel) {
-      var divertHrefToApp = impl.ac && impl.ac(sendToApp);
+      var divertHrefToApp = impl.ab && impl.ab(sendToApp);
       var view = impl.bq;
       var title = _VirtualDom_doc.title;
       var bodyNode = _VirtualDom_doc.body;
@@ -131,7 +131,7 @@ var _Browser_document = F3(function (impl, flagDecoder, args) {
       return _Browser_makeAnimator(initialModel, function (model) {
         _VirtualDom_divertHrefToApp = divertHrefToApp;
         var doc = view(model);
-        var nextNode = _VirtualDom_node("body")([])(doc.aS);
+        var nextNode = _VirtualDom_node("body")([])(doc.aQ);
         var patches = _VirtualDom_diff(currNode, nextNode);
         bodyNode = _VirtualDom_applyPatches(
           bodyNode,
@@ -141,8 +141,8 @@ var _Browser_document = F3(function (impl, flagDecoder, args) {
         );
         currNode = nextNode;
         _VirtualDom_divertHrefToApp = 0;
-        title !== doc.aM &&
-          (_VirtualDom_doc.title = title = doc.aM);
+        title !== doc.aK &&
+          (_VirtualDom_doc.title = title = doc.aK);
       });
     }
   );
@@ -200,7 +200,7 @@ function _Browser_application(impl) {
   };
 
   return _Browser_document({
-    ac: function (sendToApp) {
+    ab: function (sendToApp) {
       key.a = sendToApp;
       _Browser_window.addEventListener("popstate", key);
       _Browser_window.navigator.userAgent.indexOf("Trident") < 0 ||
@@ -222,9 +222,9 @@ function _Browser_application(impl) {
           sendToApp(
             onUrlRequest(
               next &&
-                curr.aF === next.aF &&
-                curr.ar === next.ar &&
-                curr.aB.a === next.aB.a
+                curr.aD === next.aD &&
+                curr.aq === next.aq &&
+                curr.az.a === next.az.a
                 ? $gren_lang$browser$Browser$Internal(next)
                 : $gren_lang$browser$Browser$External(href)
             )
@@ -232,8 +232,8 @@ function _Browser_application(impl) {
         }
       });
     },
-    a0: function (flags) {
-      return A3(impl.a0, flags, _Browser_getUrl(), key);
+    a_: function (flags) {
+      return A3(impl.a_, flags, _Browser_getUrl(), key);
     },
     bq: impl.bq,
     bo: impl.bo,
@@ -316,14 +316,14 @@ var _Browser_decodeEvent = F2(function (decoder, event) {
 
 function _Browser_visibilityInfo() {
   return typeof _VirtualDom_doc.hidden !== "undefined"
-    ? { a$: "hidden", aV: "visibilitychange" }
+    ? { aZ: "hidden", aT: "visibilitychange" }
     : typeof _VirtualDom_doc.mozHidden !== "undefined"
-    ? { a$: "mozHidden", aV: "mozvisibilitychange" }
+    ? { aZ: "mozHidden", aT: "mozvisibilitychange" }
     : typeof _VirtualDom_doc.msHidden !== "undefined"
-    ? { a$: "msHidden", aV: "msvisibilitychange" }
+    ? { aZ: "msHidden", aT: "msvisibilitychange" }
     : typeof _VirtualDom_doc.webkitHidden !== "undefined"
-    ? { a$: "webkitHidden", aV: "webkitvisibilitychange" }
-    : { a$: "hidden", aV: "visibilitychange" };
+    ? { aZ: "webkitHidden", aT: "webkitvisibilitychange" }
+    : { aZ: "hidden", aT: "visibilitychange" };
 }
 
 // ANIMATION FRAMES
@@ -382,8 +382,8 @@ var _Browser_call = F2(function (functionName, id) {
 
 function _Browser_getViewport() {
   return {
-    ab: _Browser_getScene(),
-    ah: {
+    aa: _Browser_getScene(),
+    ag: {
       N: _Browser_window.pageXOffset,
       O: _Browser_window.pageYOffset,
       q: _Browser_doc.documentElement.clientWidth,
@@ -425,11 +425,11 @@ var _Browser_setViewport = F2(function (x, y) {
 function _Browser_getViewportOf(id) {
   return _Browser_withNode(id, function (node) {
     return {
-      ab: {
+      aa: {
         q: node.scrollWidth,
         o: node.scrollHeight,
       },
-      ah: {
+      ag: {
         N: node.scrollLeft,
         O: node.scrollTop,
         q: node.clientWidth,
@@ -455,14 +455,14 @@ function _Browser_getElement(id) {
     var x = _Browser_window.pageXOffset;
     var y = _Browser_window.pageYOffset;
     return {
-      ab: _Browser_getScene(),
-      ah: {
+      aa: _Browser_getScene(),
+      ag: {
         N: x,
         O: y,
         q: _Browser_doc.documentElement.clientWidth,
         o: _Browser_doc.documentElement.clientHeight,
       },
-      aY: {
+      aW: {
         N: x + rect.left,
         O: y + rect.top,
         q: rect.width,
@@ -805,11 +805,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4) {
 }
 
 function _Debug_regionToString(region) {
-  if (region.ad.u === region.am.u) {
-    return "on line " + region.ad.u;
+  if (region.ac.u === region.al.u) {
+    return "on line " + region.ac.u;
   }
   return (
-    "on lines " + region.ad.u + " through " + region.am.u
+    "on lines " + region.ac.u + " through " + region.al.u
   );
 }
 var $gren_lang$core$Dict$foldl$ = function(func, acc, dict) {
@@ -819,9 +819,9 @@ var $gren_lang$core$Dict$foldl$ = function(func, acc, dict) {
 			return acc;
 		} else {
 			var _v1 = dict.a;
-			var key = _v1.V;
+			var key = _v1.a2;
 			var value = _v1.bp;
-			var left = _v1.a5;
+			var left = _v1.a4;
 			var right = _v1.bg;
 			var $temp$func = func,
 			$temp$acc = A3(func, key, value, $gren_lang$core$Dict$foldl$(func, acc, left)),
@@ -958,7 +958,7 @@ var _Array_findFirst = F2(function (pred, array) {
     var element = array[i];
 
     if (pred(element)) {
-      return $gren_lang$core$Maybe$Just({ as: i, bp: element });
+      return $gren_lang$core$Maybe$Just({ ar: i, bp: element });
     }
   }
 
@@ -970,7 +970,7 @@ var _Array_findLast = F2(function (pred, array) {
     var element = array[i];
 
     if (pred(element)) {
-      return $gren_lang$core$Maybe$Just({ as: i, bp: element });
+      return $gren_lang$core$Maybe$Just({ ar: i, bp: element });
     }
   }
 
@@ -1468,7 +1468,7 @@ function _Json_runHelp(decoder, value) {
       var result = _Json_runHelp(decoder.b, value[field]);
       return $gren_lang$core$Result$isOk(result)
         ? result
-        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Field({ az: field, B: result.a }));
+        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Field({ ay: field, B: result.a }));
 
     case 6:
       var index = decoder.e;
@@ -1488,7 +1488,7 @@ function _Json_runHelp(decoder, value) {
       var result = _Json_runHelp(decoder.b, value[index]);
       return $gren_lang$core$Result$isOk(result)
         ? result
-        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ as: index, B: result.a }));
+        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ ar: index, B: result.a }));
 
     case 7:
       if (typeof value !== "object" || value === null || _Json_isArray(value)) {
@@ -1501,10 +1501,10 @@ function _Json_runHelp(decoder, value) {
           var result = _Json_runHelp(decoder.b, value[key]);
           if (!$gren_lang$core$Result$isOk(result)) {
             return $gren_lang$core$Result$Err(
-              $gren_lang$core$Json$Decode$Field({ az: key, B: result.a }),
+              $gren_lang$core$Json$Decode$Field({ ay: key, B: result.a }),
             );
           }
-          keyValuePairs.push({ V: key, bp: result.a });
+          keyValuePairs.push({ a2: key, bp: result.a });
         }
       }
       return $gren_lang$core$Result$Ok(keyValuePairs);
@@ -1560,7 +1560,7 @@ function _Json_runArrayDecoder(decoder, value) {
   for (var i = 0; i < len; i++) {
     var result = _Json_runHelp(decoder, value[i]);
     if (!$gren_lang$core$Result$isOk(result)) {
-      return $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ as: i, B: result.a }));
+      return $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ ar: i, B: result.a }));
     }
     array[i] = result.a;
   }
@@ -1773,7 +1773,7 @@ var _String_popFirst = function (string) {
   var firstChar = String.fromCodePoint(firstPointNumber);
 
   return $gren_lang$core$Maybe$Just({
-    a_: _Utils_chr(firstChar),
+    aY: _Utils_chr(firstChar),
     bf: string.slice(firstChar.length),
   });
 };
@@ -1789,14 +1789,14 @@ var _String_popLast = function (string) {
   if (possibleLastPoint === string.charCodeAt(possibleLastPointIdx)) {
     // last char is a unit
     return $gren_lang$core$Maybe$Just({
-      a4: _Utils_chr(string[string.length - 1]),
+      a3: _Utils_chr(string[string.length - 1]),
       bf: string.slice(string.length - 1),
     });
   }
 
   // last char is a point
   return $gren_lang$core$Maybe$Just({
-    a4: _Utils_chr(String.fromCodePoint(possibleLastPoint)),
+    a3: _Utils_chr(String.fromCodePoint(possibleLastPoint)),
     bf: string.slice(string.length - 2),
   });
 };
@@ -2109,7 +2109,7 @@ var $gren_lang$core$Json$Decode$errorToStringHelp$ = function(error, context) {
 		switch (error.$) {
 			case 0:
 				var _v1 = error.a;
-				var f = _v1.az;
+				var f = _v1.ay;
 				var err = _v1.B;
 				var isSimple = function () {
 					var _v2 = $gren_lang$core$String$popFirst(f);
@@ -2117,7 +2117,7 @@ var $gren_lang$core$Json$Decode$errorToStringHelp$ = function(error, context) {
 						return false;
 					} else {
 						var _v3 = _v2.a;
-						var _char = _v3.a_;
+						var _char = _v3.aY;
 						var rest = _v3.bf;
 						return $gren_lang$core$Char$isAlpha(_char) && $gren_lang$core$String$all$($gren_lang$core$Char$isAlphaNum, rest);
 					}
@@ -2130,7 +2130,7 @@ var $gren_lang$core$Json$Decode$errorToStringHelp$ = function(error, context) {
 				continue errorToStringHelp;
 			case 1:
 				var _v4 = error.a;
-				var i = _v4.as;
+				var i = _v4.ar;
 				var err = _v4.B;
 				var indexName = '[' + ($gren_lang$core$String$fromInt(i) + ']');
 				var $temp$error = err,
@@ -2199,7 +2199,7 @@ var _Platform_worker = F3(function (impl, flagDecoder, args) {
   return _Platform_initialize(
     flagDecoder,
     args,
-    impl.a0,
+    impl.a_,
     impl.bo,
     impl.bm,
     function () {
@@ -2878,7 +2878,7 @@ var _VirtualDom_keyedNodeNS = F2(function (namespace, tag) {
   return F2(function (factList, kids) {
     for (var descendantsCount = 0, i = 0; i < kids.length; i++) {
       var kid = kids[i];
-      descendantsCount += kid.aA.b || 0;
+      descendantsCount += kid.a9.b || 0;
     }
 
     descendantsCount += kids.length;
@@ -3216,7 +3216,7 @@ function _VirtualDom_render(vNode, eventNode) {
     _VirtualDom_appendChild(
       domNode,
       _VirtualDom_render(
-        tag === 1 ? kids[i] : kids[i].aA,
+        tag === 1 ? kids[i] : kids[i].a9,
         eventNode
       )
     );
@@ -3675,10 +3675,10 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
     var x = xKids[xIndex];
     var y = yKids[yIndex];
 
-    var xKey = x.V;
-    var yKey = y.V;
-    var xNode = x.aA;
-    var yNode = y.aA;
+    var xKey = x.a2;
+    var yKey = y.a2;
+    var xNode = x.a9;
+    var yNode = y.a9;
 
     var newMatch = undefined;
     var oldMatch = undefined;
@@ -3701,14 +3701,14 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
     var yNext = yKids[yIndex + 1];
 
     if (xNext) {
-      var xNextKey = xNext.V;
-      var xNextNode = xNext.V;
+      var xNextKey = xNext.a2;
+      var xNextNode = xNext.a2;
       oldMatch = yKey === xNextKey;
     }
 
     if (yNext) {
-      var yNextKey = yNext.V;
-      var yNextNode = yNext.V;
+      var yNextKey = yNext.a2;
+      var yNextNode = yNext.a2;
       newMatch = xKey === yNextKey;
     }
 
@@ -3800,8 +3800,8 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
   while (xIndex < xLen) {
     index++;
     var x = xKids[xIndex];
-    var xNode = x.aA;
-    _VirtualDom_removeNode(changes, localPatches, x.V, xNode, index);
+    var xNode = x.a9;
+    _VirtualDom_removeNode(changes, localPatches, x.a2, xNode, index);
     index += xNode.b || 0;
     xIndex++;
   }
@@ -3812,8 +3812,8 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
     _VirtualDom_insertNode(
       changes,
       localPatches,
-      y.V,
-      y.aA,
+      y.a2,
+      y.a9,
       undefined,
       endInserts
     );
@@ -4042,7 +4042,7 @@ function _VirtualDom_addDomNodesHelp(
   var childNodes = domNode.childNodes;
   for (var j = 0; j < vKids.length; j++) {
     low++;
-    var vKid = tag === 1 ? vKids[j] : vKids[j].aA;
+    var vKid = tag === 1 ? vKids[j] : vKids[j].a9;
     var nextLow = low + (vKid.b || 0);
     if (low <= index && index <= nextLow) {
       i = _VirtualDom_addDomNodesHelp(
@@ -4341,7 +4341,7 @@ var $gren_lang$url$Url$chompBeforePath$ = function(protocol, path, params, frag,
 		var _v0 = A2($gren_lang$core$String$indices, ':', str);
 		switch (_v0.length) {
 			case 0:
-				return $gren_lang$core$Maybe$Just({ U: frag, ar: str, X: path, aB: $gren_lang$core$Maybe$Nothing, aF: protocol, Z: params });
+				return $gren_lang$core$Maybe$Just({ U: frag, aq: str, W: path, az: $gren_lang$core$Maybe$Nothing, aD: protocol, Y: params });
 			case 1:
 				var i = _v0[0];
 				var _v1 = $gren_lang$core$String$toInt($gren_lang$core$String$dropFirst$(i + 1, str));
@@ -4349,7 +4349,7 @@ var $gren_lang$url$Url$chompBeforePath$ = function(protocol, path, params, frag,
 					return $gren_lang$core$Maybe$Nothing;
 				} else {
 					var port_ = _v1;
-					return $gren_lang$core$Maybe$Just({ U: frag, ar: $gren_lang$core$String$takeFirst$(i, str), X: path, aB: port_, aF: protocol, Z: params });
+					return $gren_lang$core$Maybe$Just({ U: frag, aq: $gren_lang$core$String$takeFirst$(i, str), W: path, az: port_, aD: protocol, Y: params });
 				}
 			default:
 				return $gren_lang$core$Maybe$Nothing;
@@ -4660,6 +4660,11 @@ var $gren_lang$browser$Html$input = $gren_lang$browser$Html$node('input');
 var $gren_lang$browser$Html$label = $gren_lang$browser$Html$node('label');
 var $gren_lang$browser$Html$Attributes$name = $gren_lang$browser$Html$Attributes$stringProperty('name');
 var $gren_lang$browser$Html$Attributes$type_ = $gren_lang$browser$Html$Attributes$stringProperty('type');
+var $gren_lang$browser$VirtualDom$keyedNode = function(tag) {
+	return _VirtualDom_keyedNode(_VirtualDom_noScript(tag));
+};
+var $gren_lang$browser$Html$Keyed$node = $gren_lang$browser$VirtualDom$keyedNode;
+var $gren_lang$browser$Html$Keyed$ul = $gren_lang$browser$Html$Keyed$node('ul');
 var $author$project$Todo$Check = function (a) {
 	return { $: 7, a: a };
 };
@@ -4710,9 +4715,10 @@ var $gren_lang$browser$Html$Events$onInput = function(tagger) {
 };
 var $gren_lang$browser$Html$Attributes$value = $gren_lang$browser$Html$Attributes$stringProperty('value');
 var $author$project$Todo$viewEntry = function(todo) {
-	return A2($gren_lang$browser$Html$li, [ $gren_lang$browser$Html$Attributes$classList([ { P: 'completed', R: todo.e }, { P: 'editing', R: todo.Q } ]) ], [ A2($gren_lang$browser$Html$div, [ $gren_lang$browser$Html$Attributes$class('view') ], [ A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('toggle'), $gren_lang$browser$Html$Attributes$type_('checkbox'), $gren_lang$browser$Html$Attributes$checked(todo.e), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Check({ y: !todo.e, c: todo.c })) ], [  ]), A2($gren_lang$browser$Html$label, [ $gren_lang$browser$Html$Events$onDoubleClick($author$project$Todo$EditingEntry({ y: true, c: todo.c })) ], [ $gren_lang$browser$Html$text(todo.A) ]), A2($gren_lang$browser$Html$button, [ $gren_lang$browser$Html$Attributes$class('destroy'), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Delete(todo.c)) ], [  ]) ]), A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('edit'), $gren_lang$browser$Html$Attributes$value(todo.A), $gren_lang$browser$Html$Attributes$name('title'), $gren_lang$browser$Html$Attributes$id('todo-' + $gren_lang$core$String$fromInt(todo.c)), $gren_lang$browser$Html$Events$onInput(function(value) {
+	var nodeId = 'todo-' + $gren_lang$core$String$fromInt(todo.c);
+	return { a2: nodeId, a9: A2($gren_lang$browser$Html$li, [ $gren_lang$browser$Html$Attributes$classList([ { P: 'completed', R: todo.e }, { P: 'editing', R: todo.Q } ]) ], [ A2($gren_lang$browser$Html$div, [ $gren_lang$browser$Html$Attributes$class('view') ], [ A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('toggle'), $gren_lang$browser$Html$Attributes$type_('checkbox'), $gren_lang$browser$Html$Attributes$checked(todo.e), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Check({ y: !todo.e, c: todo.c })) ], [  ]), A2($gren_lang$browser$Html$label, [ $gren_lang$browser$Html$Events$onDoubleClick($author$project$Todo$EditingEntry({ y: true, c: todo.c })) ], [ $gren_lang$browser$Html$text(todo.A) ]), A2($gren_lang$browser$Html$button, [ $gren_lang$browser$Html$Attributes$class('destroy'), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Delete(todo.c)) ], [  ]) ]), A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('edit'), $gren_lang$browser$Html$Attributes$value(todo.A), $gren_lang$browser$Html$Attributes$name('title'), $gren_lang$browser$Html$Attributes$id(nodeId), $gren_lang$browser$Html$Events$onInput(function(value) {
 					return $author$project$Todo$UpdateEntry({ c: todo.c, bp: value });
-				}), $gren_lang$browser$Html$Events$onBlur($author$project$Todo$EditingEntry({ y: false, c: todo.c })), $author$project$Todo$onEnter($author$project$Todo$EditingEntry({ y: false, c: todo.c })) ], [  ]) ]);
+				}), $gren_lang$browser$Html$Events$onBlur($author$project$Todo$EditingEntry({ y: false, c: todo.c })), $author$project$Todo$onEnter($author$project$Todo$EditingEntry({ y: false, c: todo.c })) ], [  ]) ]) };
 };
 var $author$project$Todo$viewEntries$ = function(visibility, entries) {
 	var isVisible = function(todo) {
@@ -4729,7 +4735,7 @@ var $author$project$Todo$viewEntries$ = function(visibility, entries) {
 	var allCompleted = $gren_lang$core$Array$all$(function ($) {
 			return $.e;
 		}, entries);
-	return A2($gren_lang$browser$Html$section, [ $gren_lang$browser$Html$Attributes$class('main'), A2($gren_lang$browser$Html$Attributes$style, 'visibility', cssVisibility) ], [ A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('toggle-all'), $gren_lang$browser$Html$Attributes$type_('checkbox'), $gren_lang$browser$Html$Attributes$name('toggle'), $gren_lang$browser$Html$Attributes$checked(allCompleted), $gren_lang$browser$Html$Events$onClick($author$project$Todo$CheckAll(!allCompleted)) ], [  ]), A2($gren_lang$browser$Html$label, [ $gren_lang$browser$Html$Attributes$for('toggle-all') ], [ $gren_lang$browser$Html$text('Mark all as complete') ]), A2($gren_lang$browser$Html$ul, [ $gren_lang$browser$Html$Attributes$class('todo-list') ], A2($gren_lang$core$Array$map, $author$project$Todo$viewEntry, A2($gren_lang$core$Array$keepIf, isVisible, entries))) ]);
+	return A2($gren_lang$browser$Html$section, [ $gren_lang$browser$Html$Attributes$class('main'), A2($gren_lang$browser$Html$Attributes$style, 'visibility', cssVisibility) ], [ A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('toggle-all'), $gren_lang$browser$Html$Attributes$type_('checkbox'), $gren_lang$browser$Html$Attributes$name('toggle'), $gren_lang$browser$Html$Attributes$checked(allCompleted), $gren_lang$browser$Html$Events$onClick($author$project$Todo$CheckAll(!allCompleted)) ], [  ]), A2($gren_lang$browser$Html$label, [ $gren_lang$browser$Html$Attributes$for('toggle-all') ], [ $gren_lang$browser$Html$text('Mark all as complete') ]), A2($gren_lang$browser$Html$Keyed$ul, [ $gren_lang$browser$Html$Attributes$class('todo-list') ], A2($gren_lang$core$Array$map, $author$project$Todo$viewEntry, A2($gren_lang$core$Array$keepIf, isVisible, entries))) ]);
 };
 var $author$project$Todo$viewEntries = F2($author$project$Todo$viewEntries$);
 var $author$project$Todo$Add = { $: 4 };
@@ -4746,7 +4752,7 @@ var $author$project$Todo$viewInput = function(task) {
 var $author$project$Todo$view = function(model) {
 	return A2($gren_lang$browser$Html$div, [ $gren_lang$browser$Html$Attributes$class('todomvc-wrapper'), A2($gren_lang$browser$Html$Attributes$style, 'visibility', 'hidden') ], [ A2($gren_lang$browser$Html$section, [ $gren_lang$browser$Html$Attributes$class('todoapp') ], [ $author$project$Todo$viewInput(model.n), $author$project$Todo$viewEntries$(model.M, model.b), $author$project$Todo$viewControls$(model.M, model.b) ]), $author$project$Todo$infoFooter ]);
 };
-var $author$project$Todo$main = $gren_lang$browser$Browser$element({ a0: function(_v0) {
+var $author$project$Todo$main = $gren_lang$browser$Browser$element({ a_: function(_v0) {
 		return $author$project$Todo$init;
 	}, bm: function(_v1) {
 		return $gren_lang$core$Platform$Sub$none;
