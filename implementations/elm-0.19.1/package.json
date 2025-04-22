@@ -1,8 +1,0 @@
-{
-  "scripts": {
-    "build": "elm make Todo.elm --output elm.js --optimize"
-  },
-  "dependencies": {
-    "elm": "^0.19.1-6"
-  }
-}

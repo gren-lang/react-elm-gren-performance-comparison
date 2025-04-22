@@ -1,0 +1,8 @@
+{
+  "scripts": {
+    "build": "gren make Todo.gren --output=gren.js --optimize"
+  },
+  "dependencies": {
+    "gren-lang": "^0.5.4"
+  }
+}
