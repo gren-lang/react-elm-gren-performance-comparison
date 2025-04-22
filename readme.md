@@ -1,5 +1,8 @@
 # Comparing performance of Elm, React, Ember, and Angular
 
+TODO: Update tests to make it unecessary to remove `requestAnimationFrame` optimization from Elm and Gren
+TODO: Re-write readme
+
 Elm and React implementation taken from [lustre-labs/performance-comparison](https://github.com/lustre-labs/performance-comparison)
 
 This is a benchmark that tries to compare the performance of Elm, React, Ember, and Angular in a fair way. [I highly recommend reading the full analysis][blog], but the very short summary is that Elm is the fastest.
