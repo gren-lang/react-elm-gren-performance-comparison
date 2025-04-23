@@ -4,7 +4,7 @@ _Updated Elm and React implementations taken from [lustre-labs/performance-compa
 
 This is a benchmark that tries to compare the performance of Gren, Elm and React in a fair way.
 
-![Performance Comparison][graphs.png]
+![Performance Comparison](./graphs.png)
 
 ## Methodology
 
