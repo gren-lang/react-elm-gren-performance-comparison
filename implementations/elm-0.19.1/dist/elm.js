@@ -4023,26 +4023,10 @@ function _Browser_makeAnimator(model, draw)
 {
 	draw(model);
 
-	var state = 0;
-
-	function updateIfNeeded()
-	{
-		state = state === 1
-			? 0
-			: ( _Browser_requestAnimationFrame(updateIfNeeded), draw(model), 1 );
-	}
-
 	return function(nextModel, isSync)
 	{
 		model = nextModel;
-
-		isSync
-			? ( draw(model),
-				state === 2 && (state = 1)
-				)
-			: ( state === 0 && _Browser_requestAnimationFrame(updateIfNeeded),
-				state = 2
-				);
+		draw(model);
 	};
 }
 
