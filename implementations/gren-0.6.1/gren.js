@@ -7,36 +7,43 @@ function F(arity, fun, wrapper) {
   return wrapper;
 }
 
+/* @__NO_SIDE_EFFECTS__ */
 function F2(fun) {
   return F(2, fun, function(a) { return function(b) { return fun(a,b); }; })
 }
+/* @__NO_SIDE_EFFECTS__ */
 function F3(fun) {
   return F(3, fun, function(a) {
     return function(b) { return function(c) { return fun(a, b, c); }; };
   });
 }
+/* @__NO_SIDE_EFFECTS__ */
 function F4(fun) {
   return F(4, fun, function(a) { return function(b) { return function(c) {
     return function(d) { return fun(a, b, c, d); }; }; };
   });
 }
+/* @__NO_SIDE_EFFECTS__ */
 function F5(fun) {
   return F(5, fun, function(a) { return function(b) { return function(c) {
     return function(d) { return function(e) { return fun(a, b, c, d, e); }; }; }; };
   });
 }
+/* @__NO_SIDE_EFFECTS__ */
 function F6(fun) {
   return F(6, fun, function(a) { return function(b) { return function(c) {
     return function(d) { return function(e) { return function(f) {
     return fun(a, b, c, d, e, f); }; }; }; }; };
   });
 }
+/* @__NO_SIDE_EFFECTS__ */
 function F7(fun) {
   return F(7, fun, function(a) { return function(b) { return function(c) {
     return function(d) { return function(e) { return function(f) {
     return function(g) { return fun(a, b, c, d, e, f, g); }; }; }; }; }; };
   });
 }
+/* @__NO_SIDE_EFFECTS__ */
 function F8(fun) {
   return F(8, fun, function(a) { return function(b) { return function(c) {
     return function(d) { return function(e) { return function(f) {
@@ -44,6 +51,7 @@ function F8(fun) {
     return fun(a, b, c, d, e, f, g, h); }; }; }; }; }; }; };
   });
 }
+/* @__NO_SIDE_EFFECTS__ */
 function F9(fun) {
   return F(9, fun, function(a) { return function(b) { return function(c) {
     return function(d) { return function(e) { return function(f) {
@@ -52,27 +60,35 @@ function F9(fun) {
   });
 }
 
+/* @__NO_SIDE_EFFECTS__ */
 function A2(fun, a, b) {
   return fun.a === 2 ? fun.f(a, b) : fun(a)(b);
 }
+/* @__NO_SIDE_EFFECTS__ */
 function A3(fun, a, b, c) {
   return fun.a === 3 ? fun.f(a, b, c) : fun(a)(b)(c);
 }
+/* @__NO_SIDE_EFFECTS__ */
 function A4(fun, a, b, c, d) {
   return fun.a === 4 ? fun.f(a, b, c, d) : fun(a)(b)(c)(d);
 }
+/* @__NO_SIDE_EFFECTS__ */
 function A5(fun, a, b, c, d, e) {
   return fun.a === 5 ? fun.f(a, b, c, d, e) : fun(a)(b)(c)(d)(e);
 }
+/* @__NO_SIDE_EFFECTS__ */
 function A6(fun, a, b, c, d, e, f) {
   return fun.a === 6 ? fun.f(a, b, c, d, e, f) : fun(a)(b)(c)(d)(e)(f);
 }
+/* @__NO_SIDE_EFFECTS__ */
 function A7(fun, a, b, c, d, e, f, g) {
   return fun.a === 7 ? fun.f(a, b, c, d, e, f, g) : fun(a)(b)(c)(d)(e)(f)(g);
 }
+/* @__NO_SIDE_EFFECTS__ */
 function A8(fun, a, b, c, d, e, f, g, h) {
   return fun.a === 8 ? fun.f(a, b, c, d, e, f, g, h) : fun(a)(b)(c)(d)(e)(f)(g)(h);
 }
+/* @__NO_SIDE_EFFECTS__ */
 function A9(fun, a, b, c, d, e, f, g, h, i) {
   return fun.a === 9 ? fun.f(a, b, c, d, e, f, g, h, i) : fun(a)(b)(c)(d)(e)(f)(g)(h)(i);
 }
@@ -85,11 +101,11 @@ var _Browser_element = F3(function (impl, flagDecoder, args) {
   return _Platform_initialize(
     flagDecoder,
     args,
-    impl.a_,
-    impl.bo,
-    impl.bm,
+    impl.a$,
+    impl.bp,
+    impl.bn,
     function (sendToApp, initialModel) {
-      var view = impl.bq;
+      var view = impl.br;
       /**/
 			var domNode = args['node'];
 			//*/
@@ -105,11 +121,11 @@ var _Browser_element = F3(function (impl, flagDecoder, args) {
           domNode,
           currNode,
           patches,
-          sendToApp
+          sendToApp,
         );
         currNode = nextNode;
       });
-    }
+    },
   );
 });
 
@@ -119,32 +135,32 @@ var _Browser_document = F3(function (impl, flagDecoder, args) {
   return _Platform_initialize(
     flagDecoder,
     args,
-    impl.a_,
-    impl.bo,
-    impl.bm,
+    impl.a$,
+    impl.bp,
+    impl.bn,
     function (sendToApp, initialModel) {
-      var divertHrefToApp = impl.ab && impl.ab(sendToApp);
-      var view = impl.bq;
+      var divertHrefToApp = impl.ac && impl.ac(sendToApp);
+      var view = impl.br;
       var title = _VirtualDom_doc.title;
       var bodyNode = _VirtualDom_doc.body;
       var currNode = _VirtualDom_virtualize(bodyNode);
       return _Browser_makeAnimator(initialModel, function (model) {
         _VirtualDom_divertHrefToApp = divertHrefToApp;
         var doc = view(model);
-        var nextNode = _VirtualDom_node("body")([])(doc.aQ);
+        var nextNode = _VirtualDom_node("body")([])(doc.aR);
         var patches = _VirtualDom_diff(currNode, nextNode);
         bodyNode = _VirtualDom_applyPatches(
           bodyNode,
           currNode,
           patches,
-          sendToApp
+          sendToApp,
         );
         currNode = nextNode;
         _VirtualDom_divertHrefToApp = 0;
-        title !== doc.aK &&
-          (_VirtualDom_doc.title = title = doc.aK);
+        title !== doc.aL &&
+          (_VirtualDom_doc.title = title = doc.aL);
       });
-    }
+    },
   );
 });
 
@@ -170,22 +186,21 @@ function _Browser_makeAnimator(model, draw) {
   var state = 0;
 
   return function (nextModel, isSync) {
-    model = nextModel;
-    draw(model);
+    draw(nextModel)
   };
 }
 
 // APPLICATION
 
 function _Browser_application(impl) {
-  var onUrlChange = impl.ba;
-  var onUrlRequest = impl.bb;
+  var onUrlChange = impl.bb;
+  var onUrlRequest = impl.bc;
   var key = function () {
     key.a(onUrlChange(_Browser_getUrl()));
   };
 
   return _Browser_document({
-    ab: function (sendToApp) {
+    ac: function (sendToApp) {
       key.a = sendToApp;
       _Browser_window.addEventListener("popstate", key);
       _Browser_window.navigator.userAgent.indexOf("Trident") < 0 ||
@@ -207,22 +222,22 @@ function _Browser_application(impl) {
           sendToApp(
             onUrlRequest(
               next &&
-                curr.aD === next.aD &&
-                curr.aq === next.aq &&
-                curr.az.a === next.az.a
+                curr.aE === next.aE &&
+                curr.ar === next.ar &&
+                curr.aA.a === next.aA.a
                 ? $gren_lang$browser$Browser$Internal(next)
-                : $gren_lang$browser$Browser$External(href)
-            )
+                : $gren_lang$browser$Browser$External(href),
+            ),
           );
         }
       });
     },
-    a_: function (flags) {
-      return A3(impl.a_, flags, _Browser_getUrl(), key);
+    a$: function (flags) {
+      return A3(impl.a$, flags, _Browser_getUrl(), key);
     },
-    bq: impl.bq,
-    bo: impl.bo,
-    bm: impl.bm,
+    br: impl.br,
+    bp: impl.bp,
+    bn: impl.bn,
   });
 }
 
@@ -237,7 +252,7 @@ var _Browser_go = F2(function (key, n) {
     _Scheduler_binding(function () {
       n && history.go(n);
       key();
-    })
+    }),
   );
 });
 
@@ -248,7 +263,7 @@ var _Browser_pushUrl = F2(function (key, url) {
     _Scheduler_binding(function () {
       history.pushState({}, "", url);
       key();
-    })
+    }),
   );
 });
 
@@ -259,7 +274,7 @@ var _Browser_replaceUrl = F2(function (key, url) {
     _Scheduler_binding(function () {
       history.replaceState({}, "", url);
       key();
-    })
+    }),
   );
 });
 
@@ -283,12 +298,12 @@ var _Browser_on = F3(function (node, eventName, sendToSelf) {
       node.addEventListener(
         eventName,
         handler,
-        _VirtualDom_passiveSupported && { passive: true }
+        _VirtualDom_passiveSupported && { passive: true },
       );
       return function () {
         node.removeEventListener(eventName, handler);
       };
-    })
+    }),
   );
 });
 
@@ -301,14 +316,14 @@ var _Browser_decodeEvent = F2(function (decoder, event) {
 
 function _Browser_visibilityInfo() {
   return typeof _VirtualDom_doc.hidden !== "undefined"
-    ? { aZ: "hidden", aT: "visibilitychange" }
+    ? { a_: "hidden", aU: "visibilitychange" }
     : typeof _VirtualDom_doc.mozHidden !== "undefined"
-    ? { aZ: "mozHidden", aT: "mozvisibilitychange" }
-    : typeof _VirtualDom_doc.msHidden !== "undefined"
-    ? { aZ: "msHidden", aT: "msvisibilitychange" }
-    : typeof _VirtualDom_doc.webkitHidden !== "undefined"
-    ? { aZ: "webkitHidden", aT: "webkitvisibilitychange" }
-    : { aZ: "hidden", aT: "visibilitychange" };
+      ? { a_: "mozHidden", aU: "mozvisibilitychange" }
+      : typeof _VirtualDom_doc.msHidden !== "undefined"
+        ? { a_: "msHidden", aU: "msvisibilitychange" }
+        : typeof _VirtualDom_doc.webkitHidden !== "undefined"
+          ? { a_: "webkitHidden", aU: "webkitvisibilitychange" }
+          : { a_: "hidden", aU: "visibilitychange" };
 }
 
 // ANIMATION FRAMES
@@ -340,7 +355,7 @@ function _Browser_withNode(id, doStuff) {
       callback(
         node
           ? _Scheduler_succeed(doStuff(node))
-          : _Scheduler_fail($gren_lang$browser$Browser$Dom$NotFound(id))
+          : _Scheduler_fail($gren_lang$browser$Browser$Dom$NotFound(id)),
       );
     });
   });
@@ -367,10 +382,10 @@ var _Browser_call = F2(function (functionName, id) {
 
 function _Browser_getViewport() {
   return {
-    aa: _Browser_getScene(),
-    ag: {
-      N: _Browser_window.pageXOffset,
-      O: _Browser_window.pageYOffset,
+    ab: _Browser_getScene(),
+    ah: {
+      O: _Browser_window.pageXOffset,
+      P: _Browser_window.pageYOffset,
       q: _Browser_doc.documentElement.clientWidth,
       o: _Browser_doc.documentElement.clientHeight,
     },
@@ -386,14 +401,14 @@ function _Browser_getScene() {
       body.offsetWidth,
       elem.scrollWidth,
       elem.offsetWidth,
-      elem.clientWidth
+      elem.clientWidth,
     ),
     o: Math.max(
       body.scrollHeight,
       body.offsetHeight,
       elem.scrollHeight,
       elem.offsetHeight,
-      elem.clientHeight
+      elem.clientHeight,
     ),
   };
 }
@@ -410,13 +425,13 @@ var _Browser_setViewport = F2(function (x, y) {
 function _Browser_getViewportOf(id) {
   return _Browser_withNode(id, function (node) {
     return {
-      aa: {
+      ab: {
         q: node.scrollWidth,
         o: node.scrollHeight,
       },
-      ag: {
-        N: node.scrollLeft,
-        O: node.scrollTop,
+      ah: {
+        O: node.scrollLeft,
+        P: node.scrollTop,
         q: node.clientWidth,
         o: node.clientHeight,
       },
@@ -440,16 +455,16 @@ function _Browser_getElement(id) {
     var x = _Browser_window.pageXOffset;
     var y = _Browser_window.pageYOffset;
     return {
-      aa: _Browser_getScene(),
-      ag: {
-        N: x,
-        O: y,
+      ab: _Browser_getScene(),
+      ah: {
+        O: x,
+        P: y,
         q: _Browser_doc.documentElement.clientWidth,
         o: _Browser_doc.documentElement.clientHeight,
       },
-      aW: {
-        N: x + rect.left,
-        O: y + rect.top,
+      aX: {
+        O: x + rect.left,
+        P: y + rect.top,
         q: rect.width,
         o: rect.height,
       },
@@ -465,7 +480,7 @@ function _Browser_reload(skipCache) {
     $gren_lang$core$Basics$never,
     _Scheduler_binding(function (callback) {
       _VirtualDom_doc.location.reload(skipCache);
-    })
+    }),
   );
 }
 
@@ -481,7 +496,7 @@ function _Browser_load(url) {
         // Other browsers reload the page, so let's be consistent about that.
         _VirtualDom_doc.location.reload(false);
       }
-    })
+    }),
   );
 }
 
@@ -626,7 +641,7 @@ function _Debug_toAnsiString(ansi, value) {
     typeof _Array_Builder !== "undefined" &&
     value instanceof _Array_Builder
   ) {
-    return _Debug_toAnsiString(ansi, value.r.slice(0, value.J));
+    return _Debug_toAnsiString(ansi, value.r.slice(0, value.K));
   }
 
   if (typeof value === "object") {
@@ -790,11 +805,11 @@ function _Debug_crash_UNUSED(identifier, fact1, fact2, fact3, fact4) {
 }
 
 function _Debug_regionToString(region) {
-  if (region.ac.u === region.al.u) {
-    return "on line " + region.ac.u;
+  if (region.ad.u === region.am.u) {
+    return "on line " + region.ad.u;
   }
   return (
-    "on lines " + region.ac.u + " through " + region.al.u
+    "on lines " + region.ad.u + " through " + region.am.u
   );
 }
 var $gren_lang$core$Dict$foldl$ = function(func, acc, dict) {
@@ -804,10 +819,10 @@ var $gren_lang$core$Dict$foldl$ = function(func, acc, dict) {
 			return acc;
 		} else {
 			var _v1 = dict.a;
-			var key = _v1.a2;
-			var value = _v1.bp;
-			var left = _v1.a4;
-			var right = _v1.bg;
+			var key = _v1.a3;
+			var value = _v1.bq;
+			var left = _v1.a5;
+			var right = _v1.bh;
 			var $temp$func = func,
 			$temp$acc = A3(func, key, value, $gren_lang$core$Dict$foldl$(func, acc, left)),
 			$temp$dict = right;
@@ -943,7 +958,7 @@ var _Array_findFirst = F2(function (pred, array) {
     var element = array[i];
 
     if (pred(element)) {
-      return $gren_lang$core$Maybe$Just({ ar: i, bp: element });
+      return $gren_lang$core$Maybe$Just({ as: i, bq: element });
     }
   }
 
@@ -955,7 +970,7 @@ var _Array_findLast = F2(function (pred, array) {
     var element = array[i];
 
     if (pred(element)) {
-      return $gren_lang$core$Maybe$Just({ ar: i, bp: element });
+      return $gren_lang$core$Maybe$Just({ as: i, bq: element });
     }
   }
 
@@ -1005,7 +1020,7 @@ var _Array_sortWith = F2(function (fn, array) {
 
 class _Array_Builder {
   constructor(target, finalized, array) {
-    this.J = target;
+    this.K = target;
     this.s = finalized;
     this.r = array;
   }
@@ -1017,7 +1032,7 @@ var _Array_emptyBuilder = function (capacity) {
 
 var _Array_pushToBuilder = F2(function (value, builder) {
   var array = builder.r;
-  var target = builder.J;
+  var target = builder.K;
 
   if (builder.s) {
     array = array.slice(0, target);
@@ -1052,10 +1067,10 @@ var _Array_fromBuilder = function (builder) {
   var result = builder.r;
 
   if (builder.s) {
-    result = result.slice(0, builder.J);
+    result = result.slice(0, builder.K);
   } else {
     builder.s = true;
-    result.length = builder.J;
+    result.length = builder.K;
   }
 
   return result;
@@ -1416,7 +1431,7 @@ var _Json_runOnString = F2(function (decoder, string) {
     return $gren_lang$core$Result$Err(
       $gren_lang$core$Json$Decode$Failure({
         j: "This is not valid JSON! " + e.message,
-        bp: _Json_wrap(string),
+        bq: _Json_wrap(string),
       }),
     );
   }
@@ -1453,7 +1468,7 @@ function _Json_runHelp(decoder, value) {
       var result = _Json_runHelp(decoder.b, value[field]);
       return $gren_lang$core$Result$isOk(result)
         ? result
-        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Field({ ay: field, B: result.a }));
+        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Field({ az: field, C: result.a }));
 
     case 6:
       var index = decoder.e;
@@ -1473,7 +1488,7 @@ function _Json_runHelp(decoder, value) {
       var result = _Json_runHelp(decoder.b, value[index]);
       return $gren_lang$core$Result$isOk(result)
         ? result
-        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ ar: index, B: result.a }));
+        : $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ as: index, C: result.a }));
 
     case 7:
       if (typeof value !== "object" || value === null || _Json_isArray(value)) {
@@ -1486,10 +1501,10 @@ function _Json_runHelp(decoder, value) {
           var result = _Json_runHelp(decoder.b, value[key]);
           if (!$gren_lang$core$Result$isOk(result)) {
             return $gren_lang$core$Result$Err(
-              $gren_lang$core$Json$Decode$Field({ ay: key, B: result.a }),
+              $gren_lang$core$Json$Decode$Field({ az: key, C: result.a }),
             );
           }
-          keyValuePairs.push({ a2: key, bp: result.a });
+          keyValuePairs.push({ a3: key, bq: result.a });
         }
       }
       return $gren_lang$core$Result$Ok(keyValuePairs);
@@ -1530,7 +1545,7 @@ function _Json_runHelp(decoder, value) {
       return $gren_lang$core$Result$Err(
         $gren_lang$core$Json$Decode$Failure({
           j: decoder.a,
-          bp: _Json_wrap(value),
+          bq: _Json_wrap(value),
         }),
       );
 
@@ -1545,7 +1560,7 @@ function _Json_runArrayDecoder(decoder, value) {
   for (var i = 0; i < len; i++) {
     var result = _Json_runHelp(decoder, value[i]);
     if (!$gren_lang$core$Result$isOk(result)) {
-      return $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ ar: i, B: result.a }));
+      return $gren_lang$core$Result$Err($gren_lang$core$Json$Decode$Index({ as: i, C: result.a }));
     }
     array[i] = result.a;
   }
@@ -1563,7 +1578,7 @@ function _Json_expecting(type, value) {
   return $gren_lang$core$Result$Err(
     $gren_lang$core$Json$Decode$Failure({
       j: "Expecting " + type,
-      bp: _Json_wrap(value),
+      bq: _Json_wrap(value),
     }),
   );
 }
@@ -1758,8 +1773,8 @@ var _String_popFirst = function (string) {
   var firstChar = String.fromCodePoint(firstPointNumber);
 
   return $gren_lang$core$Maybe$Just({
-    aY: _Utils_chr(firstChar),
-    bf: string.slice(firstChar.length),
+    aZ: _Utils_chr(firstChar),
+    bg: string.slice(firstChar.length),
   });
 };
 
@@ -1774,15 +1789,15 @@ var _String_popLast = function (string) {
   if (possibleLastPoint === string.charCodeAt(possibleLastPointIdx)) {
     // last char is a unit
     return $gren_lang$core$Maybe$Just({
-      a3: _Utils_chr(string[string.length - 1]),
-      bf: string.slice(string.length - 1),
+      a4: _Utils_chr(string[string.length - 1]),
+      bg: string.slice(string.length - 1),
     });
   }
 
   // last char is a point
   return $gren_lang$core$Maybe$Just({
-    a3: _Utils_chr(String.fromCodePoint(possibleLastPoint)),
-    bf: string.slice(string.length - 2),
+    a4: _Utils_chr(String.fromCodePoint(possibleLastPoint)),
+    bg: string.slice(string.length - 2),
   });
 };
 
@@ -2094,16 +2109,16 @@ var $gren_lang$core$Json$Decode$errorToStringHelp$ = function(error, context) {
 		switch (error.$) {
 			case 0:
 				var _v1 = error.a;
-				var f = _v1.ay;
-				var err = _v1.B;
+				var f = _v1.az;
+				var err = _v1.C;
 				var isSimple = function () {
 					var _v2 = $gren_lang$core$String$popFirst(f);
 					if (_v2.$ === 1) {
 						return false;
 					} else {
 						var _v3 = _v2.a;
-						var _char = _v3.aY;
-						var rest = _v3.bf;
+						var _char = _v3.aZ;
+						var rest = _v3.bg;
 						return $gren_lang$core$Char$isAlpha(_char) && $gren_lang$core$String$all$($gren_lang$core$Char$isAlphaNum, rest);
 					}
 				}();
@@ -2115,8 +2130,8 @@ var $gren_lang$core$Json$Decode$errorToStringHelp$ = function(error, context) {
 				continue errorToStringHelp;
 			case 1:
 				var _v4 = error.a;
-				var i = _v4.ar;
-				var err = _v4.B;
+				var i = _v4.as;
+				var err = _v4.C;
 				var indexName = '[' + ($gren_lang$core$String$fromInt(i) + ']');
 				var $temp$error = err,
 				$temp$context = _Utils_ap([ indexName ], context);
@@ -2155,7 +2170,7 @@ var $gren_lang$core$Json$Decode$errorToStringHelp$ = function(error, context) {
 			default:
 				var _v8 = error.a;
 				var msg = _v8.j;
-				var json = _v8.bp;
+				var json = _v8.bq;
 				var introduction = function () {
 					if (context.length === 0) {
 						return 'Problem with the given value:\n\n';
@@ -2184,9 +2199,9 @@ var _Platform_worker = F3(function (impl, flagDecoder, args) {
   return _Platform_initialize(
     flagDecoder,
     args,
-    impl.a_,
-    impl.bo,
-    impl.bm,
+    impl.a$,
+    impl.bp,
+    impl.bn,
     function () {
       return function () {};
     },
@@ -2210,16 +2225,23 @@ function _Platform_initialize(
   );
   $gren_lang$core$Result$isOk(result) ||
     _Debug_crash(2 /**_UNUSED/, _Json_errorToString(result.a) /**/);
+
+  _Platform_setupTaskPorts(args ? args["taskPorts"] : undefined);
+
   var managers = {};
   var initPair = init(result.a);
   var model = initPair.f;
   var stepper = stepperBuilder(sendToApp, model);
-  var ports = _Platform_setupEffects(managers, sendToApp);
+  var ports = _Platform_setupEffects(managers, sendToApp, executeCmd);
 
   function sendToApp(msg, viewMetadata) {
     var pair = A2(update, msg, model);
     stepper((model = pair.f), viewMetadata);
     _Platform_enqueueEffects(managers, pair.d, subscriptions(model));
+  }
+
+  function executeCmd(cmd) {
+    _Platform_enqueueEffects(managers, cmd, subscriptions(model));
   }
 
   _Platform_enqueueEffects(managers, initPair.d, subscriptions(model));
@@ -2243,7 +2265,7 @@ function _Platform_registerPreload(url) {
 
 var _Platform_effectManagers = {};
 
-function _Platform_setupEffects(managers, sendToApp) {
+function _Platform_setupEffects(managers, sendToApp, executeCmd) {
   var ports;
 
   // setup all necessary effect managers
@@ -2255,7 +2277,11 @@ function _Platform_setupEffects(managers, sendToApp) {
       ports[key] = manager.a(key, sendToApp);
     }
 
-    managers[key] = _Platform_instantiateManager(manager, sendToApp);
+    managers[key] = _Platform_instantiateManager(
+      manager,
+      sendToApp,
+      executeCmd,
+    );
   }
 
   return ports;
@@ -2271,10 +2297,11 @@ function _Platform_createManager(init, onEffects, onSelfMsg, cmdMap, subMap) {
   };
 }
 
-function _Platform_instantiateManager(info, sendToApp) {
+function _Platform_instantiateManager(info, sendToApp, executeCmd) {
   var router = {
     g: sendToApp,
-    h: undefined,
+    h: executeCmd,
+    i: undefined,
   };
 
   var onEffects = info.c;
@@ -2294,13 +2321,13 @@ function _Platform_instantiateManager(info, sendToApp) {
         }
 
         return cmdMap && subMap
-          ? A4(onEffects, router, value.i, value.j, state)
-          : A3(onEffects, router, cmdMap ? value.i : value.j, state);
+          ? A4(onEffects, router, value.j, value.k, state)
+          : A3(onEffects, router, cmdMap ? value.j : value.k, state);
       }),
     );
   }
 
-  return (router.h = _Scheduler_rawSpawn(
+  return (router.i = _Scheduler_rawSpawn(
     A2(_Scheduler_andThen, loop, info.b),
   ));
 }
@@ -2315,9 +2342,16 @@ var _Platform_sendToApp = F2(function (router, msg) {
 });
 
 var _Platform_sendToSelf = F2(function (router, msg) {
-  return A2(_Scheduler_send, router.h, {
+  return A2(_Scheduler_send, router.i, {
     $: 0,
     a: msg,
+  });
+});
+
+var _Platform_executeCmd = F2(function (router, cmd) {
+  return _Scheduler_binding(function (callback) {
+    router.h(cmd);
+    callback(_Scheduler_succeed({}));
   });
 });
 
@@ -2327,8 +2361,8 @@ function _Platform_leaf(home) {
   return function (value) {
     return {
       $: 1,
-      k: home,
-      l: value,
+      l: home,
+      m: value,
     };
   };
 }
@@ -2336,15 +2370,15 @@ function _Platform_leaf(home) {
 function _Platform_batch(array) {
   return {
     $: 2,
-    m: array,
+    n: array,
   };
 }
 
 var _Platform_map = F2(function (tagger, bag) {
   return {
     $: 3,
-    n: tagger,
-    o: bag,
+    o: tagger,
+    p: bag,
   };
 });
 
@@ -2381,16 +2415,21 @@ var _Platform_effectsActive = false;
 
 function _Platform_enqueueEffects(managers, cmdBag, subBag) {
   _Platform_effectsQueue.push({
-    p: managers,
-    q: cmdBag,
-    r: subBag,
+    q: managers,
+    r: cmdBag,
+    s: subBag,
   });
 
   if (_Platform_effectsActive) return;
 
   _Platform_effectsActive = true;
-  for (var fx; (fx = _Platform_effectsQueue.shift()); ) {
-    _Platform_dispatchEffects(fx.p, fx.q, fx.r);
+  while (_Platform_effectsQueue.length > 0) {
+    const activeEffects = _Platform_effectsQueue;
+    _Platform_effectsQueue = [];
+
+    for (const fx of activeEffects) {
+      _Platform_dispatchEffects(fx.q, fx.r, fx.s);
+    }
   }
   _Platform_effectsActive = false;
 }
@@ -2403,7 +2442,7 @@ function _Platform_dispatchEffects(managers, cmdBag, subBag) {
   for (var home in managers) {
     _Scheduler_rawSend(managers[home], {
       $: "fx",
-      a: effectsDict[home] || { i: [], j: [] },
+      a: effectsDict[home] || { j: [], k: [] },
     });
   }
 }
@@ -2411,22 +2450,22 @@ function _Platform_dispatchEffects(managers, cmdBag, subBag) {
 function _Platform_gatherEffects(isCmd, bag, effectsDict, taggers) {
   switch (bag.$) {
     case 1:
-      var home = bag.k;
-      var effect = _Platform_toEffect(isCmd, home, taggers, bag.l);
+      var home = bag.l;
+      var effect = _Platform_toEffect(isCmd, home, taggers, bag.m);
       effectsDict[home] = _Platform_insert(isCmd, effect, effectsDict[home]);
       return;
 
     case 2:
-      var bags = bag.m;
+      var bags = bag.n;
       for (var idx = 0; idx < bags.length; idx++) {
         _Platform_gatherEffects(isCmd, bags[idx], effectsDict, taggers);
       }
       return;
 
     case 3:
-      _Platform_gatherEffects(isCmd, bag.o, effectsDict, {
-        s: bag.n,
-        t: taggers,
+      _Platform_gatherEffects(isCmd, bag.p, effectsDict, {
+        t: bag.o,
+        u: taggers,
       });
       return;
   }
@@ -2434,8 +2473,8 @@ function _Platform_gatherEffects(isCmd, bag, effectsDict, taggers) {
 
 function _Platform_toEffect(isCmd, home, taggers, value) {
   function applyTaggers(x) {
-    for (var temp = taggers; temp; temp = temp.t) {
-      x = temp.s(x);
+    for (var temp = taggers; temp; temp = temp.u) {
+      x = temp.t(x);
     }
     return x;
   }
@@ -2448,11 +2487,11 @@ function _Platform_toEffect(isCmd, home, taggers, value) {
 }
 
 function _Platform_insert(isCmd, newEffect, effects) {
-  effects = effects || { i: [], j: [] };
+  effects = effects || { j: [], k: [] };
 
   isCmd
-    ? (effects.i = A2($gren_lang$core$Array$pushLast, newEffect, effects.i))
-    : (effects.j = A2($gren_lang$core$Array$pushLast, newEffect, effects.j));
+    ? (effects.j = A2($gren_lang$core$Array$pushLast, newEffect, effects.j))
+    : (effects.k = A2($gren_lang$core$Array$pushLast, newEffect, effects.k));
 
   return effects;
 }
@@ -2463,6 +2502,10 @@ function _Platform_checkPortName(name) {
   if (_Platform_effectManagers[name]) {
     _Debug_crash(3, name);
   }
+
+  if (_Platform_taskPorts[name]) {
+    _Debug_crash(3, name);
+  }
 }
 
 // OUTGOING PORTS
@@ -2471,7 +2514,7 @@ function _Platform_outgoingPort(name, converter) {
   _Platform_checkPortName(name);
   _Platform_effectManagers[name] = {
     e: _Platform_outgoingPortMap,
-    u: converter,
+    v: converter,
     a: _Platform_setupOutgoingPort,
   };
   return _Platform_leaf(name);
@@ -2483,7 +2526,7 @@ var _Platform_outgoingPortMap = F2(function (tagger, value) {
 
 function _Platform_setupOutgoingPort(name) {
   var subs = [];
-  var converter = _Platform_effectManagers[name].u;
+  var converter = _Platform_effectManagers[name].v;
 
   // CREATE MANAGER
 
@@ -2532,7 +2575,7 @@ function _Platform_incomingPort(name, converter) {
   _Platform_checkPortName(name);
   _Platform_effectManagers[name] = {
     f: _Platform_incomingPortMap,
-    u: converter,
+    v: converter,
     a: _Platform_setupIncomingPort,
   };
   return _Platform_leaf(name);
@@ -2546,7 +2589,7 @@ var _Platform_incomingPortMap = F2(function (tagger, finalTagger) {
 
 function _Platform_setupIncomingPort(name, sendToApp) {
   var subs = [];
-  var converter = _Platform_effectManagers[name].u;
+  var converter = _Platform_effectManagers[name].v;
 
   // CREATE MANAGER
 
@@ -2574,6 +2617,95 @@ function _Platform_setupIncomingPort(name, sendToApp) {
   }
 
   return { send: send };
+}
+
+// TASK PORTS
+
+var _Platform_taskPorts = {};
+
+function _Platform_taskPort(name, inputConverter, converter) {
+  _Platform_checkPortName(name);
+  _Platform_taskPorts[name] = {};
+
+  return function (input) {
+    var encodedInput = inputConverter
+      ? _Json_unwrap(inputConverter(input))
+      : null;
+
+    return _Scheduler_binding(function (callback) {
+      var promise;
+      try {
+        promise = _Platform_taskPorts[name](encodedInput);
+      } catch (e) {
+        throw new Error(
+          "Registered code for task-based port named '" + name + "'  crashed.",
+          { cause: e },
+        );
+      }
+
+      if (!(promise instanceof Promise)) {
+        throw new Error(
+          "Handler for task port named '" +
+            name +
+            "' did not return a Promise.",
+        );
+      }
+
+      promise.then(
+        function (value) {
+          var result = A2(_Json_run, converter, _Json_wrap(value));
+
+          $gren_lang$core$Result$isOk(result) || _Debug_crash(4, name, value);
+
+          callback(_Scheduler_succeed(result.a));
+        },
+        function (err) {
+          // If Error, convert to plain object. This is because Error doesn't have enumerable
+          // properties.
+          if (err instanceof Error) {
+            var newErr = {};
+            Object.getOwnPropertyNames(err).forEach(function (key) {
+              newErr[key] = err[key];
+            });
+
+            err = newErr;
+          }
+
+          callback(_Scheduler_fail(_Json_wrap(err)));
+        },
+      );
+    });
+  };
+}
+
+function _Platform_setupTaskPorts(registeredPorts) {
+  if (typeof registeredPorts !== "object") {
+    registeredPorts = {};
+  }
+
+  for (var key in registeredPorts) {
+    if (!(key in _Platform_taskPorts)) {
+      // TODO: proper way to crash program
+      throw new Error(
+        key + " isn't defined as a task-based port in Gren code.",
+      );
+    }
+  }
+
+  for (var key in _Platform_taskPorts) {
+    var handler = registeredPorts[key];
+    if (!handler) {
+      throw new Error("No handler defined for task port named '" + key + "'.");
+    }
+
+    if (!(handler instanceof Function)) {
+      throw new Error(
+        "Handler for task port named '" + key + "' is not a function.",
+      );
+    }
+
+    _Platform_taskPorts[key] = handler;
+  }
 }
 
 // EXPORT GREN MODULES
@@ -2679,6 +2811,47 @@ function _Scheduler_receive(callback) {
   };
 }
 
+function _Scheduler_concurrent(tasks) {
+  if (tasks.length === 0) return _Scheduler_succeed([]);
+
+  return _Scheduler_binding(function (callback) {
+    let count = 0;
+    let results = new Array(tasks.length);
+    let procs;
+
+    function killAll() {
+      procs.forEach(_Scheduler_rawKill);
+    }
+
+    function onError(e) {
+      killAll();
+      callback(_Scheduler_fail(e));
+    }
+
+    procs = tasks.map((task, i) => {
+      function onSuccess(res) {
+        results[i] = res;
+        count++;
+        if (count === tasks.length) {
+          callback(_Scheduler_succeed(results));
+        }
+      }
+      const success = A2(_Scheduler_andThen, onSuccess, task);
+      const handled = A2(_Scheduler_onError, onError, success);
+      return _Scheduler_rawSpawn(handled);
+    });
+
+    return killAll;
+  });
+}
+
+var _Scheduler_map2 = F3(function (callback, taskA, taskB) {
+  function combine([resA, resB]) {
+    return _Scheduler_succeed(A2(callback, resA, resB));
+  }
+  return A2(_Scheduler_andThen, combine, _Scheduler_concurrent([taskA, taskB]));
+});
+
 // PROCESSES
 
 var _Scheduler_guid = 0;
@@ -2717,15 +2890,19 @@ var _Scheduler_send = F2(function (proc, msg) {
 
 function _Scheduler_kill(proc) {
   return _Scheduler_binding(function (callback) {
-    var task = proc.f;
-    if (task && task.$ === 2 && task.c) {
-      task.c();
-    }
-
-    proc.f = null;
+    _Scheduler_rawKill(proc);
 
     callback(_Scheduler_succeed({}));
   });
+}
+
+function _Scheduler_rawKill(proc) {
+  var task = proc.f;
+  if (task && task.$ === 2 && task.c) {
+    task.c();
+  }
+
+  proc.f = null;
 }
 
 /* STEP PROCESSES
@@ -2749,8 +2926,14 @@ function _Scheduler_enqueue(proc) {
     return;
   }
   _Scheduler_working = true;
-  while ((proc = _Scheduler_queue.shift())) {
-    _Scheduler_step(proc);
+  // Make sure tasks created during _step are run
+  while (_Scheduler_queue.length > 0) {
+    const activeProcs = _Scheduler_queue;
+    _Scheduler_queue = [];
+
+    for (const proc of activeProcs) {
+      _Scheduler_step(proc);
+    }
   }
   _Scheduler_working = false;
 }
@@ -2801,10 +2984,7 @@ function _VirtualDom_appendChild(parent, child) {
   parent.appendChild(child);
 }
 
-var _VirtualDom_init = F2(function (
-  virtualNode,
-  args
-) {
+var _VirtualDom_init = F2(function (virtualNode, args) {
   // NOTE: this function needs _Platform_export available to work
 
   /**/
@@ -2816,7 +2996,7 @@ var _VirtualDom_init = F2(function (
 
   node.parentNode.replaceChild(
     _VirtualDom_render(virtualNode, function () {}),
-    node
+    node,
   );
 
   return {};
@@ -2834,7 +3014,7 @@ function _VirtualDom_text(string) {
 // NODE
 
 var _VirtualDom_nodeNS = F2(function (namespace, tag) {
-  return F2(function(factList, kids) {
+  return F2(function (factList, kids) {
     for (var descendantsCount = 0, i = 0; i < kids.length; i++) {
       var kid = kids[i];
       descendantsCount += kid.b || 0;
@@ -2863,7 +3043,7 @@ var _VirtualDom_keyedNodeNS = F2(function (namespace, tag) {
   return F2(function (factList, kids) {
     for (var descendantsCount = 0, i = 0; i < kids.length; i++) {
       var kid = kids[i];
-      descendantsCount += kid.a9.b || 0;
+      descendantsCount += kid.ba.b || 0;
     }
 
     descendantsCount += kids.length;
@@ -3015,7 +3195,9 @@ function _VirtualDom_noOnOrFormAction(key) {
 }
 
 function _VirtualDom_noInnerHtmlOrFormAction(key) {
-  return key == "innerHTML" || key == "formAction" ? "data-" + key : key;
+  return key == "innerHTML" || key == "outerHTML" || key == "formAction"
+    ? "data-" + key
+    : key;
 }
 
 function _VirtualDom_noJavaScriptUri(value) {
@@ -3064,7 +3246,7 @@ function _VirtualDom_mapHandler(func, handler) {
         $gren_lang$core$Json$Decode$map2,
         _VirtualDom_mapMayStopPropagation,
         $gren_lang$core$Json$Decode$succeed(func),
-        handler.a
+        handler.a,
       );
       break;
     case 2:
@@ -3072,7 +3254,7 @@ function _VirtualDom_mapHandler(func, handler) {
         $gren_lang$core$Json$Decode$map2,
         _VirtualDom_mapMayPreventDefault,
         $gren_lang$core$Json$Decode$succeed(func),
-        handler.a
+        handler.a,
       );
       break;
     case 3:
@@ -3080,7 +3262,7 @@ function _VirtualDom_mapHandler(func, handler) {
         $gren_lang$core$Json$Decode$map2,
         _VirtualDom_mapEventRecord,
         $gren_lang$core$Json$Decode$succeed(func),
-        handler.a
+        handler.a,
       );
       break;
   }
@@ -3153,7 +3335,7 @@ function _VirtualDom_render(vNode, eventNode) {
   if (tag === 5) {
     return _VirtualDom_render(
       vNode.k || (vNode.k = vNode.n()),
-      eventNode
+      eventNode,
     );
   }
 
@@ -3201,9 +3383,9 @@ function _VirtualDom_render(vNode, eventNode) {
     _VirtualDom_appendChild(
       domNode,
       _VirtualDom_render(
-        tag === 1 ? kids[i] : kids[i].a9,
-        eventNode
-      )
+        tag === 1 ? kids[i] : kids[i].ba,
+        eventNode,
+      ),
     );
   }
 
@@ -3219,13 +3401,14 @@ function _VirtualDom_applyFacts(domNode, eventNode, facts) {
     key === "a1"
       ? _VirtualDom_applyStyles(domNode, value)
       : key === "a0"
-      ? _VirtualDom_applyEvents(domNode, eventNode, value)
-      : key === "a3"
-      ? _VirtualDom_applyAttrs(domNode, value)
-      : key === "a4"
-      ? _VirtualDom_applyAttrsNS(domNode, value)
-      : ((key !== "value" && key !== "checked") || domNode[key] !== value) &&
-        (domNode[key] = value);
+        ? _VirtualDom_applyEvents(domNode, eventNode, value)
+        : key === "a3"
+          ? _VirtualDom_applyAttrs(domNode, value)
+          : key === "a4"
+            ? _VirtualDom_applyAttrsNS(domNode, value)
+            : ((key !== "value" && key !== "checked") ||
+                domNode[key] !== value) &&
+              (domNode[key] = value);
   }
 }
 
@@ -3294,7 +3477,7 @@ function _VirtualDom_applyEvents(domNode, eventNode, events) {
       oldCallback,
       _VirtualDom_passiveSupported && {
         passive: $gren_lang$browser$VirtualDom$toHandlerInt(newHandler) < 2,
-      }
+      },
     );
     allCallbacks[key] = oldCallback;
   }
@@ -3312,7 +3495,7 @@ try {
       get: function () {
         _VirtualDom_passiveSupported = true;
       },
-    })
+    }),
   );
 } catch (e) {}
 
@@ -3572,10 +3755,10 @@ function _VirtualDom_diffFacts(x, y, category) {
           ? ""
           : null
         : category === "a1"
-        ? ""
-        : category === "a0" || category === "a3"
-        ? undefined
-        : { f: x[xKey].f, p: undefined };
+          ? ""
+          : category === "a0" || category === "a3"
+            ? undefined
+            : { f: x[xKey].f, p: undefined };
 
       continue;
     }
@@ -3660,10 +3843,10 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
     var x = xKids[xIndex];
     var y = yKids[yIndex];
 
-    var xKey = x.a2;
-    var yKey = y.a2;
-    var xNode = x.a9;
-    var yNode = y.a9;
+    var xKey = x.a3;
+    var yKey = y.a3;
+    var xNode = x.ba;
+    var yNode = y.ba;
 
     var newMatch = undefined;
     var oldMatch = undefined;
@@ -3686,14 +3869,14 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
     var yNext = yKids[yIndex + 1];
 
     if (xNext) {
-      var xNextKey = xNext.a2;
-      var xNextNode = xNext.a2;
+      var xNextKey = xNext.a3;
+      var xNextNode = xNext.ba;
       oldMatch = yKey === xNextKey;
     }
 
     if (yNext) {
-      var yNextKey = yNext.a2;
-      var yNextNode = yNext.a2;
+      var yNextKey = yNext.a3;
+      var yNextNode = yNext.ba;
       newMatch = xKey === yNextKey;
     }
 
@@ -3707,7 +3890,7 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
         xKey,
         yNode,
         yIndex,
-        inserts
+        inserts,
       );
       index += xNode.b || 0;
 
@@ -3729,7 +3912,7 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
         yKey,
         yNode,
         yIndex,
-        inserts
+        inserts,
       );
       _VirtualDom_diffHelp(xNode, yNextNode, localPatches, index);
       index += xNode.b || 0;
@@ -3764,7 +3947,7 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
         yKey,
         yNode,
         yIndex,
-        inserts
+        inserts,
       );
       index += xNode.b || 0;
 
@@ -3785,8 +3968,8 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
   while (xIndex < xLen) {
     index++;
     var x = xKids[xIndex];
-    var xNode = x.a9;
-    _VirtualDom_removeNode(changes, localPatches, x.a2, xNode, index);
+    var xNode = x.ba;
+    _VirtualDom_removeNode(changes, localPatches, x.a3, xNode, index);
     index += xNode.b || 0;
     xIndex++;
   }
@@ -3797,10 +3980,10 @@ function _VirtualDom_diffKeyedKids(xParent, yParent, patches, rootIndex) {
     _VirtualDom_insertNode(
       changes,
       localPatches,
-      y.a2,
-      y.a9,
+      y.a3,
+      y.ba,
       undefined,
-      endInserts
+      endInserts,
     );
     yIndex++;
   }
@@ -3824,7 +4007,7 @@ function _VirtualDom_insertNode(
   key,
   vnode,
   yIndex,
-  inserts
+  inserts,
 ) {
   var entry = changes[key];
 
@@ -3866,7 +4049,7 @@ function _VirtualDom_insertNode(
     key + _VirtualDom_POSTFIX,
     vnode,
     yIndex,
-    inserts
+    inserts,
   );
 }
 
@@ -3879,7 +4062,7 @@ function _VirtualDom_removeNode(changes, localPatches, key, vnode, index) {
       localPatches,
       9,
       index,
-      undefined
+      undefined,
     );
 
     changes[key] = {
@@ -3912,7 +4095,7 @@ function _VirtualDom_removeNode(changes, localPatches, key, vnode, index) {
     localPatches,
     key + _VirtualDom_POSTFIX,
     vnode,
-    index
+    index,
   );
 }
 
@@ -3931,7 +4114,7 @@ function _VirtualDom_addDomNodes(domNode, vNode, patches, eventNode) {
     0,
     0,
     vNode.b,
-    eventNode
+    eventNode,
   );
 }
 
@@ -3943,7 +4126,7 @@ function _VirtualDom_addDomNodesHelp(
   i,
   low,
   high,
-  eventNode
+  eventNode,
 ) {
   var patch = patches[i];
   var index = patch.s;
@@ -3966,7 +4149,7 @@ function _VirtualDom_addDomNodesHelp(
           0,
           low,
           high,
-          eventNode
+          eventNode,
         );
       }
     } else if (patchType === 9) {
@@ -3985,7 +4168,7 @@ function _VirtualDom_addDomNodesHelp(
             0,
             low,
             high,
-            eventNode
+            eventNode,
           );
         }
       }
@@ -4017,7 +4200,7 @@ function _VirtualDom_addDomNodesHelp(
       i,
       low + 1,
       high,
-      domNode.gren_event_node_ref
+      domNode.gren_event_node_ref,
     );
   }
 
@@ -4027,7 +4210,7 @@ function _VirtualDom_addDomNodesHelp(
   var childNodes = domNode.childNodes;
   for (var j = 0; j < vKids.length; j++) {
     low++;
-    var vKid = tag === 1 ? vKids[j] : vKids[j].a9;
+    var vKid = tag === 1 ? vKids[j] : vKids[j].ba;
     var nextLow = low + (vKid.b || 0);
     if (low <= index && index <= nextLow) {
       i = _VirtualDom_addDomNodesHelp(
@@ -4037,7 +4220,7 @@ function _VirtualDom_addDomNodesHelp(
         i,
         low,
         nextLow,
-        eventNode
+        eventNode,
       );
       if (!(patch = patches[i]) || (index = patch.s) > high) {
         return i;
@@ -4054,7 +4237,7 @@ function _VirtualDom_applyPatches(
   rootDomNode,
   oldVirtualNode,
   patches,
-  eventNode
+  eventNode,
 ) {
   if (patches.length === 0) {
     return rootDomNode;
@@ -4082,7 +4265,7 @@ function _VirtualDom_applyPatch(domNode, patch) {
       return _VirtualDom_applyPatchRedraw(
         domNode,
         patch.t,
-        patch.v
+        patch.v,
       );
 
     case 4:
@@ -4122,7 +4305,7 @@ function _VirtualDom_applyPatch(domNode, patch) {
       for (; i < kids.length; i++) {
         domNode.insertBefore(
           _VirtualDom_render(kids[i], patch.v),
-          theEnd
+          theEnd,
         );
       }
       return domNode;
@@ -4171,7 +4354,7 @@ function _VirtualDom_applyPatchReorder(domNode, patch) {
   // remove end inserts
   var frag = _VirtualDom_applyPatchReorderEndInsertsHelp(
     data.z,
-    patch
+    patch,
   );
 
   // removals
@@ -4210,7 +4393,7 @@ function _VirtualDom_applyPatchReorderEndInsertsHelp(endInserts, patch) {
       frag,
       entry.c === 2
         ? entry.t
-        : _VirtualDom_render(entry.A, patch.v)
+        : _VirtualDom_render(entry.A, patch.v),
     );
   }
   return frag;
@@ -4326,7 +4509,7 @@ var $gren_lang$url$Url$chompBeforePath$ = function(protocol, path, params, frag,
 		var _v0 = A2($gren_lang$core$String$indices, ':', str);
 		switch (_v0.length) {
 			case 0:
-				return $gren_lang$core$Maybe$Just({ U: frag, aq: str, W: path, az: $gren_lang$core$Maybe$Nothing, aD: protocol, Y: params });
+				return $gren_lang$core$Maybe$Just({ V: frag, ar: str, X: path, aA: $gren_lang$core$Maybe$Nothing, aE: protocol, Z: params });
 			case 1:
 				var i = _v0[0];
 				var _v1 = $gren_lang$core$String$toInt($gren_lang$core$String$dropFirst$(i + 1, str));
@@ -4334,7 +4517,7 @@ var $gren_lang$url$Url$chompBeforePath$ = function(protocol, path, params, frag,
 					return $gren_lang$core$Maybe$Nothing;
 				} else {
 					var port_ = _v1;
-					return $gren_lang$core$Maybe$Just({ U: frag, aq: $gren_lang$core$String$takeFirst$(i, str), W: path, az: port_, aD: protocol, Y: params });
+					return $gren_lang$core$Maybe$Just({ V: frag, ar: $gren_lang$core$String$takeFirst$(i, str), X: path, aA: port_, aE: protocol, Z: params });
 				}
 			default:
 				return $gren_lang$core$Maybe$Nothing;
@@ -4416,29 +4599,27 @@ var $gren_lang$core$Task$map$ = function(func, taskA) {
 };
 var $gren_lang$core$Task$map = F2($gren_lang$core$Task$map$);
 var $gren_lang$core$Array$foldr = _Array_foldr;
-var $gren_lang$core$Task$map2$ = function(func, taskA, taskB) {
-	return A2($gren_lang$core$Task$andThen, function(a) {
-			return A2($gren_lang$core$Task$andThen, function(b) {
-					return $gren_lang$core$Task$succeed(A2(func, a, b));
-				}, taskB);
-		}, taskA);
-};
-var $gren_lang$core$Task$map2 = F3($gren_lang$core$Task$map2$);
 var $gren_lang$core$Array$pushFirst$ = function(value, array) {
 	return A4(_Array_splice1, 0, 0, value, array);
 };
 var $gren_lang$core$Array$pushFirst = F2($gren_lang$core$Array$pushFirst$);
-var $gren_lang$core$Task$sequence = function(tasks) {
-	return A3($gren_lang$core$Array$foldr, $gren_lang$core$Task$map2($gren_lang$core$Array$pushFirst), $gren_lang$core$Task$succeed([  ]), tasks);
-};
+var $gren_lang$core$Task$sequence = A2($gren_lang$core$Array$foldr, F2(function(task, combined) {
+			return A2($gren_lang$core$Task$andThen, function(x) {
+					return $gren_lang$core$Task$map$($gren_lang$core$Array$pushFirst(x), combined);
+				}, task);
+		}), $gren_lang$core$Task$succeed([  ]));
 var $gren_lang$core$Platform$sendToApp = _Platform_sendToApp;
 var $gren_lang$core$Task$spawnCmd$ = function(router, cmd) {
-	if (!cmd.$) {
-		var task = cmd.a;
-		return _Scheduler_spawn(A2($gren_lang$core$Task$andThen, $gren_lang$core$Platform$sendToApp(router), task));
-	} else {
-		var task = cmd.a;
-		return _Scheduler_spawn(task);
+	switch (cmd.$) {
+		case 0:
+			var task = cmd.a;
+			return _Scheduler_spawn(A2($gren_lang$core$Task$andThen, $gren_lang$core$Platform$sendToApp(router), task));
+		case 1:
+			var task = cmd.a;
+			return _Scheduler_spawn(A2($gren_lang$core$Task$andThen, _Platform_executeCmd(router), task));
+		default:
+			var task = cmd.a;
+			return _Scheduler_spawn(task);
 	}
 };
 var $gren_lang$core$Task$spawnCmd = F2($gren_lang$core$Task$spawnCmd$);
@@ -4453,15 +4634,23 @@ var $gren_lang$core$Task$onSelfMsg$ = function(_v0, _v1, _v2) {
 };
 var $gren_lang$core$Task$onSelfMsg = F3($gren_lang$core$Task$onSelfMsg$);
 var $gren_lang$core$Task$Execute = function (a) {
+	return { $: 2, a: a };
+};
+var $gren_lang$core$Task$ExecuteCmd = function (a) {
 	return { $: 1, a: a };
 };
+var $gren_lang$core$Platform$Cmd$map = _Platform_map;
 var $gren_lang$core$Task$cmdMap$ = function(tagger, cmd) {
-	if (!cmd.$) {
-		var task = cmd.a;
-		return $gren_lang$core$Task$Perform($gren_lang$core$Task$map$(tagger, task));
-	} else {
-		var task = cmd.a;
-		return $gren_lang$core$Task$Execute(task);
+	switch (cmd.$) {
+		case 0:
+			var task = cmd.a;
+			return $gren_lang$core$Task$Perform($gren_lang$core$Task$map$(tagger, task));
+		case 1:
+			var task = cmd.a;
+			return $gren_lang$core$Task$ExecuteCmd($gren_lang$core$Task$map$($gren_lang$core$Platform$Cmd$map(tagger), task));
+		default:
+			var task = cmd.a;
+			return $gren_lang$core$Task$Execute(task);
 	}
 };
 var $gren_lang$core$Task$cmdMap = F2($gren_lang$core$Task$cmdMap$);
@@ -4472,7 +4661,7 @@ var $gren_lang$core$Task$perform$ = function(toMessage, task) {
 };
 var $gren_lang$core$Task$perform = F2($gren_lang$core$Task$perform$);
 var $gren_lang$browser$Browser$element = _Browser_element;
-var $author$project$Todo$emptyModel = { b: [  ], n: '', L: 0, M: 'All' };
+var $author$project$Todo$emptyModel = { b: [  ], n: '', M: 0, N: 'All' };
 var $gren_lang$core$Platform$Cmd$batch = _Platform_batch;
 var $gren_lang$core$Platform$Cmd$none = $gren_lang$core$Platform$Cmd$batch([  ]);
 var $author$project$Todo$init = { d: $gren_lang$core$Platform$Cmd$none, f: $author$project$Todo$emptyModel };
@@ -4483,7 +4672,7 @@ var $author$project$Todo$focus = _Platform_outgoingPort('focus', $gren_lang$core
 var $gren_lang$core$Array$keepIf = _Array_filter;
 var $gren_lang$core$Basics$neq = _Utils_notEqual;
 var $author$project$Todo$newEntry$ = function(desc, id) {
-	return { e: false, A: desc, Q: false, c: id };
+	return { e: false, B: desc, R: false, c: id };
 };
 var $author$project$Todo$newEntry = F2($author$project$Todo$newEntry$);
 var $author$project$Todo$update$ = function(msg, model) {
@@ -4491,7 +4680,7 @@ var $author$project$Todo$update$ = function(msg, model) {
 		case 0:
 			return { d: $gren_lang$core$Platform$Cmd$none, f: model };
 		case 4:
-			return { d: $gren_lang$core$Platform$Cmd$none, f: _Utils_update(model, { b: $gren_lang$core$String$isEmpty(model.n) ? model.b : _Utils_ap(model.b, [ $author$project$Todo$newEntry$(model.n, model.L) ]), n: '', L: model.L + 1 }) };
+			return { d: $gren_lang$core$Platform$Cmd$none, f: _Utils_update(model, { b: $gren_lang$core$String$isEmpty(model.n) ? model.b : _Utils_ap(model.b, [ $author$project$Todo$newEntry$(model.n, model.M) ]), n: '', M: model.M + 1 }) };
 		case 1:
 			var str = msg.a;
 			return { d: $gren_lang$core$Platform$Cmd$none, f: _Utils_update(model, { n: str }) };
@@ -4500,15 +4689,15 @@ var $author$project$Todo$update$ = function(msg, model) {
 			var id = _v1.c;
 			var isEditing = _v1.y;
 			var updateEntry = function(t) {
-				return _Utils_eq(t.c, id) ? _Utils_update(t, { Q: isEditing }) : t;
+				return _Utils_eq(t.c, id) ? _Utils_update(t, { R: isEditing }) : t;
 			};
 			return { d: $author$project$Todo$focus('#todo-' + $gren_lang$core$String$fromInt(id)), f: _Utils_update(model, { b: A2($gren_lang$core$Array$map, updateEntry, model.b) }) };
 		case 3:
 			var _v2 = msg.a;
 			var id = _v2.c;
-			var task = _v2.bp;
+			var task = _v2.bq;
 			var updateEntry = function(t) {
-				return _Utils_eq(t.c, id) ? _Utils_update(t, { A: task }) : t;
+				return _Utils_eq(t.c, id) ? _Utils_update(t, { B: task }) : t;
 			};
 			return { d: $gren_lang$core$Platform$Cmd$none, f: _Utils_update(model, { b: A2($gren_lang$core$Array$map, updateEntry, model.b) }) };
 		case 5:
@@ -4536,7 +4725,7 @@ var $author$project$Todo$update$ = function(msg, model) {
 			return { d: $gren_lang$core$Platform$Cmd$none, f: _Utils_update(model, { b: A2($gren_lang$core$Array$map, updateEntry, model.b) }) };
 		default:
 			var visibility = msg.a;
-			return { d: $gren_lang$core$Platform$Cmd$none, f: _Utils_update(model, { M: visibility }) };
+			return { d: $gren_lang$core$Platform$Cmd$none, f: _Utils_update(model, { N: visibility }) };
 	}
 };
 var $author$project$Todo$update = F2($author$project$Todo$update$);
@@ -4605,14 +4794,14 @@ var $author$project$Todo$ChangeVisibility = function (a) {
 };
 var $gren_lang$browser$Html$Attributes$classList = function(classes) {
 	return $gren_lang$browser$Html$Attributes$class(A2($gren_lang$core$String$join, ' ', A2($gren_lang$core$Array$map, function ($) {
-					return $.P;
+					return $.Q;
 				}, A2($gren_lang$core$Array$keepIf, function ($) {
-						return $.R;
+						return $.S;
 					}, classes))));
 };
 var $gren_lang$browser$Html$li = $gren_lang$browser$Html$node('li');
 var $author$project$Todo$visibilitySwap$ = function(uri, visibility, actualVisibility) {
-	return A2($gren_lang$browser$Html$li, [ $gren_lang$browser$Html$Events$onClick($author$project$Todo$ChangeVisibility(visibility)) ], [ A2($gren_lang$browser$Html$a, [ $gren_lang$browser$Html$Attributes$href(uri), $gren_lang$browser$Html$Attributes$classList([ { P: 'selected', R: _Utils_eq(visibility, actualVisibility) } ]) ], [ $gren_lang$browser$Html$text(visibility) ]) ]);
+	return A2($gren_lang$browser$Html$li, [ $gren_lang$browser$Html$Events$onClick($author$project$Todo$ChangeVisibility(visibility)) ], [ A2($gren_lang$browser$Html$a, [ $gren_lang$browser$Html$Attributes$href(uri), $gren_lang$browser$Html$Attributes$classList([ { Q: 'selected', S: _Utils_eq(visibility, actualVisibility) } ]) ], [ $gren_lang$browser$Html$text(visibility) ]) ]);
 };
 var $author$project$Todo$visibilitySwap = F3($author$project$Todo$visibilitySwap$);
 var $author$project$Todo$viewControlsFilters = function(visibility) {
@@ -4701,8 +4890,8 @@ var $gren_lang$browser$Html$Events$onInput = function(tagger) {
 var $gren_lang$browser$Html$Attributes$value = $gren_lang$browser$Html$Attributes$stringProperty('value');
 var $author$project$Todo$viewEntry = function(todo) {
 	var nodeId = 'todo-' + $gren_lang$core$String$fromInt(todo.c);
-	return { a2: nodeId, a9: A2($gren_lang$browser$Html$li, [ $gren_lang$browser$Html$Attributes$classList([ { P: 'completed', R: todo.e }, { P: 'editing', R: todo.Q } ]) ], [ A2($gren_lang$browser$Html$div, [ $gren_lang$browser$Html$Attributes$class('view') ], [ A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('toggle'), $gren_lang$browser$Html$Attributes$type_('checkbox'), $gren_lang$browser$Html$Attributes$checked(todo.e), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Check({ y: !todo.e, c: todo.c })) ], [  ]), A2($gren_lang$browser$Html$label, [ $gren_lang$browser$Html$Events$onDoubleClick($author$project$Todo$EditingEntry({ y: true, c: todo.c })) ], [ $gren_lang$browser$Html$text(todo.A) ]), A2($gren_lang$browser$Html$button, [ $gren_lang$browser$Html$Attributes$class('destroy'), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Delete(todo.c)) ], [  ]) ]), A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('edit'), $gren_lang$browser$Html$Attributes$value(todo.A), $gren_lang$browser$Html$Attributes$name('title'), $gren_lang$browser$Html$Attributes$id(nodeId), $gren_lang$browser$Html$Events$onInput(function(value) {
-					return $author$project$Todo$UpdateEntry({ c: todo.c, bp: value });
+	return { a3: nodeId, ba: A2($gren_lang$browser$Html$li, [ $gren_lang$browser$Html$Attributes$classList([ { Q: 'completed', S: todo.e }, { Q: 'editing', S: todo.R } ]) ], [ A2($gren_lang$browser$Html$div, [ $gren_lang$browser$Html$Attributes$class('view') ], [ A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('toggle'), $gren_lang$browser$Html$Attributes$type_('checkbox'), $gren_lang$browser$Html$Attributes$checked(todo.e), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Check({ y: !todo.e, c: todo.c })) ], [  ]), A2($gren_lang$browser$Html$label, [ $gren_lang$browser$Html$Events$onDoubleClick($author$project$Todo$EditingEntry({ y: true, c: todo.c })) ], [ $gren_lang$browser$Html$text(todo.B) ]), A2($gren_lang$browser$Html$button, [ $gren_lang$browser$Html$Attributes$class('destroy'), $gren_lang$browser$Html$Events$onClick($author$project$Todo$Delete(todo.c)) ], [  ]) ]), A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('edit'), $gren_lang$browser$Html$Attributes$value(todo.B), $gren_lang$browser$Html$Attributes$name('title'), $gren_lang$browser$Html$Attributes$id(nodeId), $gren_lang$browser$Html$Events$onInput(function(value) {
+					return $author$project$Todo$UpdateEntry({ c: todo.c, bq: value });
 				}), $gren_lang$browser$Html$Events$onBlur($author$project$Todo$EditingEntry({ y: false, c: todo.c })), $author$project$Todo$onEnter($author$project$Todo$EditingEntry({ y: false, c: todo.c })) ], [  ]) ]) };
 };
 var $author$project$Todo$viewEntries$ = function(visibility, entries) {
@@ -4735,11 +4924,11 @@ var $author$project$Todo$viewInput = function(task) {
 	return A2($gren_lang$browser$Html$header, [ $gren_lang$browser$Html$Attributes$class('header') ], [ A2($gren_lang$browser$Html$h1, [  ], [ $gren_lang$browser$Html$text('todos') ]), A2($gren_lang$browser$Html$input, [ $gren_lang$browser$Html$Attributes$class('new-todo'), $gren_lang$browser$Html$Attributes$placeholder('What needs to be done?'), $gren_lang$browser$Html$Attributes$autofocus(true), $gren_lang$browser$Html$Attributes$value(task), $gren_lang$browser$Html$Attributes$name('newTodo'), $gren_lang$browser$Html$Events$onInput($author$project$Todo$UpdateField), $author$project$Todo$onEnter($author$project$Todo$Add) ], [  ]) ]);
 };
 var $author$project$Todo$view = function(model) {
-	return A2($gren_lang$browser$Html$div, [ $gren_lang$browser$Html$Attributes$class('todomvc-wrapper'), A2($gren_lang$browser$Html$Attributes$style, 'visibility', 'hidden') ], [ A2($gren_lang$browser$Html$section, [ $gren_lang$browser$Html$Attributes$class('todoapp') ], [ $author$project$Todo$viewInput(model.n), $author$project$Todo$viewEntries$(model.M, model.b), $author$project$Todo$viewControls$(model.M, model.b) ]), $author$project$Todo$infoFooter ]);
+	return A2($gren_lang$browser$Html$div, [ $gren_lang$browser$Html$Attributes$class('todomvc-wrapper'), A2($gren_lang$browser$Html$Attributes$style, 'visibility', 'hidden') ], [ A2($gren_lang$browser$Html$section, [ $gren_lang$browser$Html$Attributes$class('todoapp') ], [ $author$project$Todo$viewInput(model.n), $author$project$Todo$viewEntries$(model.N, model.b), $author$project$Todo$viewControls$(model.N, model.b) ]), $author$project$Todo$infoFooter ]);
 };
-var $author$project$Todo$main = $gren_lang$browser$Browser$element({ a_: function(_v0) {
+var $author$project$Todo$main = $gren_lang$browser$Browser$element({ a$: function(_v0) {
 		return $author$project$Todo$init;
-	}, bm: function(_v1) {
+	}, bn: function(_v1) {
 		return $gren_lang$core$Platform$Sub$none;
-	}, bo: $author$project$Todo$update, bq: $author$project$Todo$view });
+	}, bp: $author$project$Todo$update, br: $author$project$Todo$view });
 _Platform_export({'Todo':{'init':$author$project$Todo$main($gren_lang$core$Json$Decode$succeed({  }))}});}(this.module ? this.module.exports : this));
